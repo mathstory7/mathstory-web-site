@@ -1,0 +1,108 @@
+import datetime
+
+date, time, timedelta, datetime
+
+day = datetime.date(2020, 5, 15)
+day
+
+print(day)
+
+today = datetime.date.today()
+today
+
+print(today)
+
+time = datetime.titme(14, 25 , 32)
+
+time = datetime.titme(14, 25 , 32)
+time
+
+import datetime
+
+time =datetime.time(14, 25, 32)
+print(time)
+
+import datetime
+
+week = datetime.timedelta(weeks=1)
+week
+
+week*2
+
+today + week
+
+today = datetime.date(2021, 12, 1)
+
+today + week
+
+datetime_dt = datetime.datetime.strptime('2015-2-14 16:23:45', '%Y-%m-%d %H:%M:%S')
+                          
+
+
+datetime_dt = datetime.datetime.strptime('2015-2-14 16:23:45', '%Y-%m-%d %H:%M:%S')
+
+datetime_dt
+
+print(datetime_dt)
+
+datetime_str = datetime_dt.strftime('%Y-%m-%d %H:%M:%S')
+datetime_str
+
+type(datetime_str)
+
+type(datetime_dt)
+
+datetime_str = datetime_dt.strftime('%Y-%m %H:%M')
+datetime_str
+
+import datetime
+
+date, time, timedelta, datetime
+
+import datetime
+
+
+date, time, timedelta, datetime
+
+day = datetime.date(2020, 5, 15)
+day
+
+print(day)
+
+
+today = datetime.date.today()
+today
+
+print(today)
+
+time = datetime.time(14, 25, 32)
+time
+
+print(time)
+
+week = datetime.timedelta(weeks=1)
+week
+
+weeek*2
+
+week*2
+
+today + week
+
+datetime_dt = datetime.datetime.strptime('2015-2-14 16:23:45', '%Y-%m-%d %H:%M:%S')
+datetime_dt
+
+datetime_dt + week
+
+datetime_str = datetime_dt.strftime('%Y-%m-%d %H:%M:%S')
+datetime_dt
+datetime_str
+
+type(datetime_str)
+
+
+type(datetime_dt)
+
+datetime_str = datetime_dt.strftime('%Y-%m %H:%M')
+datetime_str
+
