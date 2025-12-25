@@ -1,0 +1,26 @@
+import numpy as np
+
+today = np.datetime64('2021-12-02')
+today
+
+an_day = np.datetime64(1000, 's')
+an_day
+
+an_day = np.datetime64(1000, 'M')
+an_day
+
+[1, 2, 3]
+
+
+np.array([1, 2, 3])
+
+
+np.array(['2021-12-01', '2021-12-03', '2021-11-12'], dtype='datetime64')
+
+
+np.arange(1, 100, 2)
+
+np.arange('2021-11-01', '2021-12-03', dtype= 'datetime64[M]')
+
+np.datetime64('2021-12-03') - np.datetime64('2020-10-15')
+
