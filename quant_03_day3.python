@@ -1,0 +1,37 @@
+import pandas as pd
+
+
+a = pd.Timestamp('2020-12-12 11:22:33')
+
+a
+
+print(a)
+
+b = pd.Timestamp(1000, unit='D')
+b
+
+c = pd.to_datetime('2021-1-2 11:33:55')
+
+c
+
+d = pd.to_datetime(['2020-1-1', '2021-2-25'])
+d
+
+e = pd.date_range('2020-1', '2021-12')
+e
+
+ f = pd.date_range('2020-1', '2021-12', freq='B')
+ f
+
+ g = pd.date_range('2020-1', '2021-12', freq='W')
+ g
+
+h = pd.Period('2021-12-15')
+h
+
+h.start_time
+
+h.end_time
+
+pd.period_range('2020-3-5', '2020-8-20', freq='D')
+
