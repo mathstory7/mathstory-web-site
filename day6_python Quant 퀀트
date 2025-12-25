@@ -1,0 +1,23 @@
+from pandas_datareader import data as wb
+
+# 1. 현재 주피터 환경에 강제로 설치 
+import sys
+!{sys.executable} -m pip install yfinance  # 주피터에서 직접 설치할때는  앞에 느낌표를 써야합니다.
+#야후 보안정책이 강화 되어서 yfinance로 해야해요.
+# 2. 설치 확인 후 바로 데이터 가져오기
+import yfinance as yf
+sa_pr = yf.download("005930.KS", start="2021-01-01")
+
+# 3. 결과 확인
+sa_pr.head()
+
+import FinanceDataReader as fdr
+
+!pip install finance-datareader
+
+import FinanceDataRedaer as fdr
+
+import FinanceDataReader as fdr
+df = fdr.DataReader('005930', '2021')
+df.head()
+
