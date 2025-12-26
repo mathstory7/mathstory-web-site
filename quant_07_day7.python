@@ -1,0 +1,20 @@
+import yfinance as yf
+
+df = yf.download("005930.KS", start="2021-01-01")
+df
+#datareader 사용불가 야후 정책변화
+
+df['Open']
+
+# 날짜가 인덱스라면 이렇게 하세요.
+df.loc['2021-01-08', 'Open']
+
+df
+
+df[['Open', 'Close']]
+
+df[0:5]
+
+df['2021-01-04':'2021-01-06']
+
+
