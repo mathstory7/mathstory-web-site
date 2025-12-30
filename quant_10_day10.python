@@ -1,0 +1,18 @@
+import FinanceDataReader as fdr
+
+df = fdr.DataReader('AAPL', '2021')
+
+df
+
+df['Close_lag'] = df['Close'].shift()
+
+df
+
+df['Close_lag'] = df['Close'].shift(3)
+
+df
+
+df['Close_lag_-1'] = df['Close'].shift(-1)
+
+df
+
