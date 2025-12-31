@@ -1,1 +1,24 @@
+import FinanceDataReader as fdr
+df = fdr.DataReader('AAPL', '2021')
+
+df
+
+df['Close.diff'] = df['Close'].diff()
+
+df
+
+df['Close.diff'] = df['Close'].diff(2)
+
+df
+
+df['Close.diff_-1'] = df['Close'].diff(-1)
+
+df
+
+df['Close'],diff(axis=1)
+
+df['Close']
+
+df.diff(axis=1)
+
 
