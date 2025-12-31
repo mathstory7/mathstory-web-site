@@ -1,0 +1,17 @@
+import FinanceDataReader as fdr
+df = fdr.DataReader('AAPL', '2021')
+
+df
+
+df['pct.change'] = df['Close'].pct_change()
+
+df
+
+df['pct.change_2'] = df['Close'].pct_change(2)
+
+df
+
+df['aaa'] = df['Close'] - df['Close'].shift(1) / df['Close'].shift(1)
+
+df
+
