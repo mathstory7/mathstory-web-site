@@ -1,1 +1,10 @@
 
+import FinanceDataReader as fdr
+df = fdr.DataReader('AAPL', '2021')
+
+df
+
+df.resample(rule='M').mean()
+
+df.resample(rule='MS').mean()
+
