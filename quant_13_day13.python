@@ -1,1 +1,18 @@
+import FinanceDataReader as fdr
+df = fdr.DataReader('AAPL', '2021')
+
+df
+
+df['Close'].rolling(window=3, center=False,axis=0)
+
+type(df['Close'].rolling(window=3, center=False,axis=0))
+
+df['MA_S'] = df['Close'].rolling(window=5).mean()
+
+df
+
+df['MAX_3'] = df['Close'].rolling(window=5).max()
+
+df.iloc[0:20]
+
 
