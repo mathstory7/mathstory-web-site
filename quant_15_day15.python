@@ -1,1 +1,29 @@
+import FinanceDataReader as fdr
+df = fdr.DataReader('AAPL', '2000')
+
+df
+
+df['daily_rtn'] = df['Close'].pct_change()
+
+df
+
+df['st_rtn'] = (1+df['daily_rtn']).cumprod()
+
+df
+
+start_date = '2011-01-04'
+end_date = '2021-05-06'
+tmp_df = df_loc[start_date:end_date , ['st_rtn']] / df.loc[start_Date, ['st_rtn']]
+
+tmp_df = df.loc[start_date:end_date, ['st_rtn']] / df.loc[start_date, ['st_rtn']]
+
+
+tmp_df
+
+tmp_df.loc[end_date, 'st_rtn']
+
+import matplotlib.pyplot as plt
+
+tmp_df.plot(figsize=(16, 9))
+
 
