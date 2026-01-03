@@ -1,1 +1,66 @@
+import FinanceDataReader as fdr
+df = fdr.DataReader('AAPL', '2000')
+
+df
+
+df['daily_rtn'] = df['Close'].pct_change()
+
+df
+
+df['st_rtn'] = (df['daily_rtn'] * 1).cumprod()
+
+df
+
+start_date = '2018-10-08'
+end_date = '2022-01-12'
+tmp_df = df.loc[start_date:end_date, ['st_rtn']] / df.loc[start_date, 'st_rtn']]
+
+tmp_df
+
+start_date = '2018-10-08'
+end_date = '2022-01-12'
+
+# 기준점(start_date)의 값을 변수에 담아 나눗셈을 진행합니다.
+# ['st_rtn'] 대신 컬럼 이름이 맞는지 꼭 확인하세요!
+tmp_df = df.loc[start_date:end_date, ['st_rtn']] / df.loc[start_date, 'st_rtn']
+
+
+
+tmp_df
+
+start_date = '2018-10-08'
+end_date = '2022-01-12'
+
+# 기준점(start_date)의 값을 변수에 담아 나눗셈을 진행합니다.
+# ['st_rtn'] 대신 컬럼 이름이 맞는지 꼭 확인하세요!
+tmp_df = df.loc[start_date:end_date, ['st_rtn']] / df.loc[start_date, 'st_rtn']
+
+tmp_df
+
+start_date = '2018-10-08'
+end_date   = '2022-01-12'
+
+tmp_df = df.loc[start_date:end_date, ['st_rtn']] / df.loc[start_date, ['st_rtn']]
+
+
+tmp_df
+
+df['st_rtn'] = (1 + df['daily_rtn']).cumprod()
+df['st_rtn'] = df['st_rtn'].fillna(1)
+
+
+df
+
+start_date = '2018-10-08'
+end_date   = '2022-01-12'
+
+tmp_df = df.loc[start_date:end_date, ['st_rtn']] / df.loc[start_date, ['st_rtn']]
+
+
+tmp_df
+
+CAGR =  tmp_df.loc['2022-01-12', 'st_rtn'] ** (252./len(tmp_df.index)) - 1
+
+CAGR
+
 
