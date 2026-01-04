@@ -1,1 +1,29 @@
+import FinanceDataReader as fdr
+df = fdr.DataReader('AAPL', '2000')
+
+df
+
+
+start_date = '2021-02-04'
+end_date = '2022-02-03'
+tmp_df = df.loc[start_date:end_date]
+
+tmp_df
+
+historical_max = tmp_df['Close'].cummax()
+
+historical_max
+
+daily_mdd = tmp_df['Close'] / historical_max -1.0
+
+daily_mdd
+
+mdd = daily_mdd.cummin()
+
+mdd
+
+mdd.plot()
+
+daily_mdd.plot()
+
 
