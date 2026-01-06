@@ -1,1 +1,26 @@
+import FinanceDataReader as fdr
+df = fdr.DataReader('AAPL', '2000')
+
+df
+
+start_date = '2021-02-04'
+end_date = '2022-03-03'
+tmp_df = df.loc[start_date:end_date]
+
+tmp_df
+
+tmp_df['daily_rtn'] = tmp_df['Close'].pct_change()
+
+tmp_df
+
+import numpy as np
+
+VOL = np.std(tmp_df['daily_rtn']) * np.sqrt(252.0)
+
+VOL
+
+SHARP = np.mean(tmp_df['daily_rtn']) / VOL
+
+SHARP
+
 
