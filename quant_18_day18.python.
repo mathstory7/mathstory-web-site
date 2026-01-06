@@ -1,1 +1,29 @@
 
+import FinanceDataReader as fdr
+import numpy as np
+
+!pip install FinanceDataReader
+
+!pip install finance-datareader
+
+
+import FinanceDataReader as fdr
+import numpy as np
+
+df = fdr.DataReader('AAPL','2000')
+df
+
+start = '2021-06-13'
+end = '2022-02-03'
+tmp_df = df.loc[start: end]
+tmp_df
+
+VOL = np.std(tmp_df['Change']) * np.sqrt(252.)
+
+VOL
+
+daily_return = tmp_df['Close'].pct_change()   # 하루 수익률(퍼센트 변화)
+VOL = daily_return.std() * np.sqrt(252.)      # 연환산(1년 기준) 변동성
+VOL
+
+
