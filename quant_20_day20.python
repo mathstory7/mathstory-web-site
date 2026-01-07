@@ -1,1 +1,38 @@
 
+import pandas as pd
+
+
+import matplotlib.pyplot as plt
+
+import FinanceDataReader as fdr
+
+code = "005380"  # 현대차
+start = "2015-01-01"
+end   = "2022-03-21"
+
+df = fdr.DataReader(code, start, end)
+df.head()
+
+
+window = 20
+
+df['center'] = df['Close'].rolling(window).mean()
+std = df['Close'].rolling(window).std()
+
+df['ub'] = df['center'] + 2 * std
+df['lb'] = df['center'] - 2 * std
+
+
+sample = df.dropna().tail(250).copy()
+
+
+plt.figure(figsize=(40,20))
+
+plt.plot(sample['Close'],  color='black', alpha=0.5)  # 종가
+plt.plot(sample['center'], color='red')               # 중심선
+plt.plot(sample['lb'],     color='blue')              # 하단밴드
+plt.plot(sample['ub'],     color='blue')              # 상단밴드
+
+plt.show()
+
+
