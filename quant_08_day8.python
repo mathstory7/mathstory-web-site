@@ -1,4 +1,6 @@
-!pip install yfinance
+!pip install finance-datareader
+
+! pip install yfinance
 
 import yfinance as yf
 df = yf.download('005930.KS', start='2021-01-01')
@@ -6,17 +8,19 @@ df
 
 df.loc[ '2021-01-08' , 'Open' ]
 
-df.loc[ '2021-01-08', ['Close','High','Low','Open','Volume']]
+df.loc[ '2021-01-08' , ['High', 'Low', 'Open', 'Volume']]
 
-df.loc[ '2021-01-08']
+df.loc['2021-01-08']
 
-df.loc[:,'Open']
+df.loc[: ,'Open']
 
-df.loc[ ['2021-01-07' , '2021-01-08'] , ['High','Low'] ]
+df.loc[ ['2021-01-07', '2021-01-08'] , ['High', 'Low']]
 
 df
 
 df.iloc[ 1 , 3 ]
 
 df.iloc[ 1:5 , 1:4 ]
+
+
 
