@@ -1,1 +1,118 @@
 
+import FinanceDataReader as fdr
+df = fdr.DataReader('005380', '2015')
+
+df
+
+df = df.loc[:, ['Close']].copy()
+df
+
+df['center'] = df['Close'].rolling(window=20).mean()
+
+df
+
+
+df['up_band'] = df['center'] + 2*df['Close'].rolling(window=20).std()
+df
+
+df['up_band'] = df['center'] - 2*df['Close'].rolling(window=20).std()
+df
+
+df = df.dropna()
+df
+
+
+
+book = df[['Close']].copy()
+book['trade'] = ''
+book
+
+window = 20
+k = 2
+
+df['center'] = df['Close'].rolling(window).mean()
+std = df['Close'].rolling(window).std()
+
+df['up_band'] = df['center'] + k * std
+df['low_band'] = df['center'] - k * std
+
+
+for i in df.index:
+    if df.loc[i, 'Close'] > df.loc[i, 'up_band']:
+        book.loc[i, 'trade'] = ''
+        
+    elif df.loc[i, 'Close'] < df.loc[i, 'low_band']:
+        book.loc[i, 'trade'] = 'buy'
+        
+    elif df.loc[i, 'low_band'] <= df.loc[i, 'Close'] <= df.loc[i, 'up_band']:
+        if book.shift(1).loc[i, 'trade'] == 'buy':
+            book.loc[i, 'trade'] = 'buy'
+        else:
+            book.loc[i, 'trade'] = ''
+
+
+book
+
+
+
+rtn = 1.0
+buy = 0.0
+sell = 0.0
+book['rtn'] = 1
+
+
+import pandas as pd
+book = pd.DataFrame()
+book['rtn'] = 1
+book
+
+
+rtn = 1.0
+buy = 0.0
+sell = 0.0
+book['rtn'] = 1
+
+
+for i in book_index:
+    if book.loc[i, 'trade'] == 'buy' and book.shift(1).loc[i, 'trade'] == '':
+        buy = book.loc[i, 'Close']
+        print ('진입일: ', i, '매수가격 : ', buy )
+    elif  book.loc[i, 'trade'] == 'buy' and book.shift(1).loc[i, 'trade'] == 'buy':
+        sell = book.loc[i, 'Close']
+        rtn = (sell - buy) / buy + 1
+        book.loc[i, 'rtn'] = rtn
+        print('청산일 : ', i, '매수가격 : ', buy, '매도가격 : ', sell, '수익률 : ', round(rtn, 4))
+    if book.loc[i, 'trade'] == '':
+        buy = 0.0
+        sell = 0.0
+acc_rtn = 1.0
+for i in book.index:
+    rtn = book.loc[i, 'rtn']
+    acc_rtn = acc_rtn + rtn
+    book.loc[i, 'acc_rtn'] = acc_rtn
+print('누적수익률 : ', round(acc_rtn, 4))
+
+for i in book.index:
+    if book.loc[i, 'trade'] == 'buy' and book.shift(1).loc[i, 'trade'] == '':
+        buy = book.loc[i, 'Close']
+
+
+for i in book_index:
+    if book.loc[i, 'trade'] == 'buy' and book.shift(1).loc[i, 'trade'] == '':
+        buy = book.loc[i, 'Close']
+        print ('진입일: ', i, '매수가격 : ', buy )
+    elif  book.loc[i, 'trade'] == 'buy' and book.shift(1).loc[i, 'trade'] == 'buy':
+        sell = book.loc[i, 'Close']
+        rtn = (sell - buy) / buy + 1
+        book.loc[i, 'rtn'] = rtn
+        print('청산일 : ', i, '매수가격 : ', buy, '매도가격 : ', sell, '수익률 : ', round(rtn, 4))
+    if book.loc[i, 'trade'] == '':
+        buy = 0.0
+        sell = 0.0
+acc_rtn = 1.0
+for i in book.index:
+    rtn = book.loc[i, 'rtn']
+    acc_rtn = acc_rtn + rtn
+    book.loc[i, 'acc_rtn'] = acc_rtn
+print('누적수익률 : ', round(acc_rtn, 4))
+
