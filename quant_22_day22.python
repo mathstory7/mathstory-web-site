@@ -1,1 +1,55 @@
+import FinanceDataReader as fdr
+df = fdr.DataReader('005380', '2015')
+
+df
+
+df = df.loc[:, ['Close']].copy()
+df
+
+df['center'] = df['Close'].rolling(window=20).mean()
+
+df
+
+
+df['up_band'] = df['center'] + 2*df['Close'].rolling(window=20).std()
+df
+
+df['up_band'] = df['center'] - 2*df['Close'].rolling(window=20).std()
+df
+
+df = df.dropna()
+df
+
+
+
+book = df[['Close']].copy()
+book['trade'] = ''
+book
+
+window = 20
+k = 2
+
+df['center'] = df['Close'].rolling(window).mean()
+std = df['Close'].rolling(window).std()
+
+df['up_band'] = df['center'] + k * std
+df['low_band'] = df['center'] - k * std
+
+
+for i in df.index:
+    if df.loc[i, 'Close'] > df.loc[i, 'up_band']:
+        book.loc[i, 'trade'] = ''
+        
+    elif df.loc[i, 'Close'] < df.loc[i, 'low_band']:
+        book.loc[i, 'trade'] = 'buy'
+        
+    elif df.loc[i, 'low_band'] <= df.loc[i, 'Close'] <= df.loc[i, 'up_band']:
+        if book.shift(1).loc[i, 'trade'] == 'buy':
+            book.loc[i, 'trade'] = 'buy'
+        else:
+            book.loc[i, 'trade'] = ''
+
+
+book
+
 
