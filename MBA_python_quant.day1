@@ -1,1 +1,499 @@
+  Cell In[24], line 1
+    f'나의 이름 {name}이며, {birth}년에 태어났습니다.'
+
+NameError: name 'name' is not defined
+
+
+name = '윤용건'
+birth = '1993'
+
+f'나의 이름 {name}이며, {birth}년에 태어났습니다.'
+Out[25]: '나의 이름 윤용건이며, 1993년에 태어났습니다.'
+
+a = 'Life is too short'
+len(a)
+Out[26]: 17
+
+var = '퀀트 투자 포트폴리오 만들기'
+var.replace(' ', '_')
+Out[27]: '퀀트_투자_포트폴리오_만들기'
+
+var.split(' ')
+Out[28]: ['퀀트', '투자', '포트폴리오', '만들기']
+
+var = 'Quant'
+var[2]
+Out[29]: 'a'
+
+var[-2]
+Out[30]: 'n'
+
+var[0 : 3]
+Out[31]: 'Qua'
+
+var[:2]
+Out[32]: 'Qu'
+
+var[3:]
+Out[33]: 'nt'
+
+a = []
+
+tyoe(a)
+Traceback (most recent call last):
+
+  Cell In[35], line 1
+    tyoe(a)
+
+NameError: name 'tyoe' is not defined
+
+
+a = []
+type(a)
+Out[36]: list
+
+list_num
+Traceback (most recent call last):
+
+  Cell In[37], line 1
+    list_num
+
+NameError: name 'list_num' is not defined
+
+
+
+list_num = [1, 2, 3]
+list_num
+Out[38]: [1, 2, 3]
+
+list_char = ['a', 'b', 'c']
+list_char
+Out[39]: ['a', 'b', 'c']
+
+list_c = [1, 'a', 2]
+list_c
+Out[40]: [1, 'a', 2]
+
+
+list_nest = [1, 2, ['a', 'b']]
+list_nest
+Out[41]: [1, 2, ['a', 'b']]
+
+var = [1,2, ['a', 'b', 'c']]
+var[0]
+Out[42]: 1
+
+var[2]
+Out[43]: ['a', 'b', 'c']
+
+var[2][0]
+Out[44]: 'a'
+
+var[0:2]
+Out[45]: [1, 2]
+
+a+b
+Traceback (most recent call last):
+
+  Cell In[46], line 1
+    a+b
+
+TypeError: can only concatenate list (not "str") to list
+
+
+a = [1,2,3]
+b = [4,5,6]
+
+a+b
+Out[47]: [1, 2, 3, 4, 5, 6]
+
+a*3
+Out[48]: [1, 2, 3, 1, 2, 3, 1, 2, 3]
+
+var = [1,2,3]
+var.append(4)
+
+var
+Out[50]: [1, 2, 3, 4]
+
+var = [1,2,3]
+var.append([4,5])
+var
+Out[51]: [1, 2, 3, [4, 5]]
+
+var = [1,2,3]
+var.extend([4,5])
+var
+Out[52]: [1, 2, 3, 4, 5]
+
+var = [1,2,3,4,5]
+var[2] = 10
+
+var
+Out[54]: [1, 2, 10, 4, 5]
+
+
+var[3] = ['a', 'b', 'c']
+var
+Out[55]: [1, 2, 10, ['a', 'b', 'c'], 5]
+
+var[0:2]
+Out[56]: [1, 2]
+
+var[0:2] = ['가', '나']
+var
+Out[57]: ['가', '나', 10, ['a', 'b', 'c'], 5]
+
+del var[0]
+
+var = [1,2,3]
+del var[0]
+var
+Out[59]: [2, 3]
+
+var = [1,2,3]
+var[0:1] = []
+
+var
+Out[61]: [2, 3]
+
+var [1,2,3,1,2,3]
+var.remove(1)
+Traceback (most recent call last):
+
+  Cell In[62], line 1
+    var [1,2,3,1,2,3]
+
+TypeError: list indices must be integers or slices, not tuple
+
+
+var [1,2,3,1,2,3]
+var.remove(1)
+var
+Traceback (most recent call last):
+
+  Cell In[63], line 1
+    var [1,2,3,1,2,3]
+
+TypeError: list indices must be integers or slices, not tuple
+
+
+
+var = [1,2,3,1,2,3]
+var.remove(1)
+var
+Out[64]: [2, 3, 1, 2, 3]
+
+var.pop()
+Out[65]: 3
+
+var = [1,2,3]
+var.pop()
+Out[66]: 3
+
+var
+Out[67]: [1, 2]
+
+var = [2,4,1,3]
+
+var.sort()
+var
+Out[68]: [1, 2, 3, 4]
+
+var = ()
+type
+Out[69]: type
+
+type(var)
+Out[70]: tuple
+
+var(1)
+Traceback (most recent call last):
+
+  Cell In[71], line 1
+    var(1)
+
+TypeError: 'tuple' object is not callable
+
+
+var
+Out[72]: ()
+
+var = (1)
+var
+Out[73]: 1
+
+var = (1, )
+var
+Out[74]: (1,)
+
+var = (1,2, ('a', 'b'))
+var
+Out[75]: (1, 2, ('a', 'b'))
+
+del var[0]
+Traceback (most recent call last):
+
+  Cell In[76], line 1
+    del var[0]
+
+TypeError: 'tuple' object doesn't support item deletion
+
+
+var[0]
+Out[77]: 1
+
+var[0:3]
+Out[78]: (1, 2, ('a', 'b'))
+
+var = ['
+  Cell In[79], line 1
+    var = ['
+           ^
+SyntaxError: unterminated string literal (detected at line 1)
+
+
+var = ['key1' : 1, 'key2' : 2]
+var
+  Cell In[80], line 1
+    var = ['key1' : 1, 'key2' : 2]
+                  ^
+SyntaxError: invalid syntax
+
+
+var = {'key1' : 1, 'key2' : 2}
+var
+Out[81]: {'key1': 1, 'key2': 2}
+
+var = {'key1' : [1, 2, 3], 'key2' : ('a', 'b', 'c')}
+var
+Out[82]: {'key1': [1, 2, 3], 'key2': ('a', 'b', 'c')}
+
+var = {'key1': 1, 'key2': 2, 'key3': 3}
+var['key1']
+Out[83]: 1
+
+
+var = {'key1' : 1, 'key2' : 2}
+var
+Out[84]: {'key1': 1, 'key2': 2}
+
+var['key3'] = 3
+
+var = {'key1' : 1, 'key2' : 2}
+var
+var['key3'] = 3
+var
+Out[86]: {'key1': 1, 'key2': 2, 'key3': 3}
+
+var
+Out[87]: {'key1': 1, 'key2': 2, 'key3': 3}
+
+
+del var['key3']
+var
+Out[88]: {'key1': 1, 'key2': 2}
+
+var.keys()
+Out[89]: dict_keys(['key1', 'key2'])
+
+list(var.keys())
+Out[90]: ['key1', 'key2']
+
+list(var.values())
+Out[91]: [1, 2]
+
+set1
+Traceback (most recent call last):
+
+  Cell In[92], line 1
+    set1
+
+NameError: name 'set1' is not defined
+
+
+set1 = set([1,2,3])
+set1
+Out[93]: {1, 2, 3}
+
+set2 = st('banana')
+set2
+Traceback (most recent call last):
+
+  Cell In[94], line 1
+    set2 = st('banana')
+
+NameError: name 'st' is not defined
+
+
+
+set2 = set('banana')
+set2
+Out[95]: {'a', 'b', 'n'}
+
+s1 = set([1,2,3,4])
+s2 = set([3,4,5,6])
+
+s1.union(s2)
+Out[96]: {1, 2, 3, 4, 5, 6}
+
+s1.intersection(s2)
+Out[97]: {3, 4}
+
+s1.difference(s2)
+Out[98]: {1, 2}
+
+var = True
+
+type(var)
+Out[100]: bool
+
+1 == 1
+Out[101]: True
+
+1 != 2
+Out[102]: True
+
+bool(0)
+Out[103]: False
+
+bool(1)
+Out[104]: True
+
+bool(2)
+Out[105]: True
+
+bool(None)
+Out[106]: False
+
+bool("")
+Out[107]: False
+
+boool([])
+Traceback (most recent call last):
+
+  Cell In[108], line 1
+    boool([])
+
+NameError: name 'boool' is not defined
+
+
+bool([])
+Out[109]: False
+
+bool('a')
+Out[110]: True
+
+bool([1,2,3])
+Out[111]: True
+
+bool9{'key' : 'value'}
+  Cell In[112], line 1
+    bool9{'key' : 'value'}
+         ^
+SyntaxError: invalid syntax
+
+
+bool{
+  Cell In[113], line 1
+    bool{
+        ^
+SyntaxError: '{' was never closed
+
+
+bool(())
+Out[114]: False
+
+bool({'key' : 'value'})
+Out[115]: True
+
+import datetime 
+
+var = datetime.datetime.now()
+var
+Out[116]: datetime.datetime(2026, 1, 20, 15, 52, 14, 190627)
+
+type(var)
+Out[117]: datetime.datetime
+
+var.year
+Out[118]: 2026
+
+var.month
+Out[119]: 1
+
+var.day
+Out[120]: 20
+
+var.minute
+Out[121]: 52
+
+var.second
+Out[122]: 14
+
+var.microsecond
+Out[123]: 190627
+
+var.weekday()
+Out[124]: 1
+
+var.date()
+Out[125]: datetime.date(2026, 1, 20)
+
+var.time()
+Out[126]: datetime.time(15, 52, 14, 190627)
+
+var
+var.strftime('%Y-%m-%d')
+Out[127]: '2026-01-20'
+
+datetime.datetime.strptime('2022-12-31 11:59:59', '%Y-%m-%d %H-%M-%S')
+Traceback (most recent call last):
+
+  Cell In[128], line 1
+    datetime.datetime.strptime('2022-12-31 11:59:59', '%Y-%m-%d %H-%M-%S')
+
+  File ~\anaconda93\Lib\_strptime.py:568 in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+
+  File ~\anaconda93\Lib\_strptime.py:349 in _strptime
+    raise ValueError("time data %r does not match format %r" %
+
+ValueError: time data '2022-12-31 11:59:59' does not match format '%Y-%m-%d %H-%M-%S'
+
+
+datetime.datetime.strptime('2022-12-31 11:59:59', '%Y-%m-%d %H:%M:%S')
+Out[129]: datetime.datetime(2022, 12, 31, 11, 59, 59)
+
+dt1 - dt2
+Traceback (most recent call last):
+
+  Cell In[130], line 1
+    dt1 - dt2
+
+NameError: name 'dt1' is not defined
+
+
+dt1 = datetime.datetime(2022, 12, 31)
+dt2 = datetime.datetime(2021, 12, 31)
+
+dt1 - dt2
+Out[131]: datetime.timedelta(days=365)
+
+
+from dateutil.relativedeltan import relativedelta
+dt1 + relativedelta(months = 1)
+Traceback (most recent call last):
+
+  Cell In[132], line 1
+    from dateutil.relativedeltan import relativedelta
+
+ModuleNotFoundError: No module named 'dateutil.relativedeltan'
+
+
+from dateutil.relativedelta import relativedelta
+
+from dateutil.relativedelta import relativedelta
+dt1 + relativedelta(months = 1)
+Out[134]: datetime.datetime(2023, 1, 31, 0, 0)
 
