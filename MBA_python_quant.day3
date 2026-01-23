@@ -1,1 +1,113 @@
 
+  File pandas\_libs\parsers.pyx:2029 in pandas._libs.parsers.raise_parser_error
+
+ParserError: Error tokenizing data. C error: Expected 1 fields in line 38, saw 2
+
+
+
+
+data_csv = pd.read_csv(
+    "https://raw.githubusercontent.com/mathstory7/mathstory/master/data.csv"
+)
+
+data_csv
+Traceback (most recent call last):
+
+  Cell In[39], line 1
+    data_csv = pd.read_csv(
+
+  File ~\anaconda93\Lib\site-packages\pandas\io\parsers\readers.py:912 in read_csv
+    return _read(filepath_or_buffer, kwds)
+
+  File ~\anaconda93\Lib\site-packages\pandas\io\parsers\readers.py:577 in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+
+  File ~\anaconda93\Lib\site-packages\pandas\io\parsers\readers.py:1407 in __init__
+    self._engine = self._make_engine(f, self.engine)
+
+  File ~\anaconda93\Lib\site-packages\pandas\io\parsers\readers.py:1661 in _make_engine
+    self.handles = get_handle(
+
+  File ~\anaconda93\Lib\site-packages\pandas\io\common.py:716 in get_handle
+    ioargs = _get_filepath_or_buffer(
+
+  File ~\anaconda93\Lib\site-packages\pandas\io\common.py:368 in _get_filepath_or_buffer
+    with urlopen(req_info) as req:
+
+  File ~\anaconda93\Lib\site-packages\pandas\io\common.py:270 in urlopen
+    return urllib.request.urlopen(*args, **kwargs)
+
+  File ~\anaconda93\Lib\urllib\request.py:216 in urlopen
+    return opener.open(url, data, timeout)
+
+  File ~\anaconda93\Lib\urllib\request.py:525 in open
+    response = meth(req, response)
+
+  File ~\anaconda93\Lib\urllib\request.py:634 in http_response
+    response = self.parent.error(
+
+  File ~\anaconda93\Lib\urllib\request.py:563 in error
+    return self._call_chain(*args)
+
+  File ~\anaconda93\Lib\urllib\request.py:496 in _call_chain
+    result = func(*args)
+
+  File ~\anaconda93\Lib\urllib\request.py:643 in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+
+HTTPError: Not Found
+
+
+
+data_csv = pd.read_csv(
+    "https://raw.githubusercontent.com/mathstory7/mathstory/main/data.csv"
+)
+
+data_csv
+Traceback (most recent call last):
+
+  Cell In[40], line 1
+    data_csv = pd.read_csv(
+
+  File ~\anaconda93\Lib\site-packages\pandas\io\parsers\readers.py:912 in read_csv
+    return _read(filepath_or_buffer, kwds)
+
+  File ~\anaconda93\Lib\site-packages\pandas\io\parsers\readers.py:577 in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+
+  File ~\anaconda93\Lib\site-packages\pandas\io\parsers\readers.py:1407 in __init__
+    self._engine = self._make_engine(f, self.engine)
+
+  File ~\anaconda93\Lib\site-packages\pandas\io\parsers\readers.py:1661 in _make_engine
+    self.handles = get_handle(
+
+  File ~\anaconda93\Lib\site-packages\pandas\io\common.py:716 in get_handle
+    ioargs = _get_filepath_or_buffer(
+
+  File ~\anaconda93\Lib\site-packages\pandas\io\common.py:368 in _get_filepath_or_buffer
+    with urlopen(req_info) as req:
+
+  File ~\anaconda93\Lib\site-packages\pandas\io\common.py:270 in urlopen
+    return urllib.request.urlopen(*args, **kwargs)
+
+  File ~\anaconda93\Lib\urllib\request.py:216 in urlopen
+    return opener.open(url, data, timeout)
+
+  File ~\anaconda93\Lib\urllib\request.py:525 in open
+    response = meth(req, response)
+
+  File ~\anaconda93\Lib\urllib\request.py:634 in http_response
+    response = self.parent.error(
+
+  File ~\anaconda93\Lib\urllib\request.py:563 in error
+    return self._call_chain(*args)
+
+  File ~\anaconda93\Lib\urllib\request.py:496 in _call_chain
+    result = func(*args)
+
+  File ~\anaconda93\Lib\urllib\request.py:643 in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+
+HTTPError: Not Found
+
+
