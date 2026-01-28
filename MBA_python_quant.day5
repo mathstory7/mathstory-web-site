@@ -1,1 +1,510 @@
+import seaborn as sns
 
+import matplotlib.pyplot as plt
+
+
+df = sns.load_dataset("penguins")
+
+df.head()
+Out[4]: 
+  species     island  bill_length_mm  ...  flipper_length_mm  body_mass_g     sex
+0  Adelie  Torgersen            39.1  ...              181.0       3750.0    Male
+1  Adelie  Torgersen            39.5  ...              186.0       3800.0  Female
+2  Adelie  Torgersen            40.3  ...              195.0       3250.0  Female
+3  Adelie  Torgersen             NaN  ...                NaN          NaN     NaN
+4  Adelie  Torgersen            36.7  ...              193.0       3450.0  Female
+
+[5 rows x 7 columns]
+
+plt.scatter(df["flipper_length_mm"], df["body_mass_g"])
+Out[5]: <matplotlib.collections.PathCollection at 0x1c3d63fded0>
+ 
+Important
+Figures are displayed in the Plots pane by default. To make them also appear inline in the console, you need to uncheck "Mute inline plotting" under the options menu of Plots.
+ 
+
+plt.scatter(df["flipper_length_mm"], df["body_mass_g"])
+plt.show()
+
+df_group = df.groupby("species")["body_mass_g"].mean().reset_index()
+
+plt.bar(df_group["species"], df_group["body_mass_g"])
+Out[8]: <BarContainer object of 3 artists>
+
+plt.show()
+
+plt.rc("font", family="Malgun Gothic")
+plt.rcParams["axes.unicode_minus"] = False
+
+plt.hist(df["body_mass_g"], bins=30)
+Out[11]: 
+(array([ 1.,  7.,  7.,  8., 11., 24., 22., 24., 25., 15., 26., 12., 16.,
+        12., 14., 11., 17., 13., 10.,  9.,  9.,  7.,  9., 11.,  5.,  8.,
+         3.,  5.,  0.,  1.]),
+ array([2700., 2820., 2940., 3060., 3180., 3300., 3420., 3540., 3660.,
+        3780., 3900., 4020., 4140., 4260., 4380., 4500., 4620., 4740.,
+        4860., 4980., 5100., 5220., 5340., 5460., 5580., 5700., 5820.,
+        5940., 6060., 6180., 6300.]),
+ <BarContainer object of 30 artists>)
+
+plt.xlabel("Body mass")
+Out[12]: Text(0.5, 0, 'Body mass')
+
+plt.hist(df["body_mass_g"], bins=30)
+plt.xlabel("Body mass")
+Out[13]: Text(0.5, 0, 'Body mass')
+
+plt.ylabel("Count")
+Out[14]: Text(0, 0.5, 'Count')
+
+plt.hist(df["body_mass_g"], bins=30)
+plt.xlabel("Body mass")
+plt.ylabel("Count")
+Out[15]: Text(0, 0.5, 'Count')
+
+
+plt.hist(df["body_mass_g"], bins=30)
+plt.xlabel("Body mass")
+plt.ylabel("Count")
+plt.title("펭귄의 몸무게 분포")
+plt.show()
+
+import pandas as pd
+
+df_unrate = pd.read_csv(
+    "https://research.stlouisfed.org/fred2/series/UNRATE/downloaddata/UNRATE.csv"
+)
+Traceback (most recent call last):
+
+  Cell In[18], line 1
+    df_unrate = pd.read_csv(
+
+  File ~\anaconda93\Lib\site-packages\pandas\io\parsers\readers.py:912 in read_csv
+    return _read(filepath_or_buffer, kwds)
+
+  File ~\anaconda93\Lib\site-packages\pandas\io\parsers\readers.py:577 in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+
+  File ~\anaconda93\Lib\site-packages\pandas\io\parsers\readers.py:1407 in __init__
+    self._engine = self._make_engine(f, self.engine)
+
+  File ~\anaconda93\Lib\site-packages\pandas\io\parsers\readers.py:1661 in _make_engine
+    self.handles = get_handle(
+
+  File ~\anaconda93\Lib\site-packages\pandas\io\common.py:716 in get_handle
+    ioargs = _get_filepath_or_buffer(
+
+  File ~\anaconda93\Lib\site-packages\pandas\io\common.py:368 in _get_filepath_or_buffer
+    with urlopen(req_info) as req:
+
+  File ~\anaconda93\Lib\site-packages\pandas\io\common.py:270 in urlopen
+    return urllib.request.urlopen(*args, **kwargs)
+
+  File ~\anaconda93\Lib\urllib\request.py:216 in urlopen
+    return opener.open(url, data, timeout)
+
+  File ~\anaconda93\Lib\urllib\request.py:525 in open
+    response = meth(req, response)
+
+  File ~\anaconda93\Lib\urllib\request.py:634 in http_response
+    response = self.parent.error(
+
+  File ~\anaconda93\Lib\urllib\request.py:557 in error
+    result = self._call_chain(*args)
+
+  File ~\anaconda93\Lib\urllib\request.py:496 in _call_chain
+    result = func(*args)
+
+  File ~\anaconda93\Lib\urllib\request.py:749 in http_error_302
+    return self.parent.open(new, timeout=req.timeout)
+
+  File ~\anaconda93\Lib\urllib\request.py:525 in open
+    response = meth(req, response)
+
+  File ~\anaconda93\Lib\urllib\request.py:634 in http_response
+    response = self.parent.error(
+
+  File ~\anaconda93\Lib\urllib\request.py:563 in error
+    return self._call_chain(*args)
+
+  File ~\anaconda93\Lib\urllib\request.py:496 in _call_chain
+    result = func(*args)
+
+  File ~\anaconda93\Lib\urllib\request.py:643 in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+
+HTTPError: Not Found
+
+
+df_unrate["DATE"] = pd.to_datetime(df_unrate["DATE"])
+Traceback (most recent call last):
+
+  Cell In[19], line 1
+    df_unrate["DATE"] = pd.to_datetime(df_unrate["DATE"])
+
+NameError: name 'df_unrate' is not defined
+
+
+plt.plot(df_unrate["DATE"], df_unrate["VALUE"])
+plt.show()
+Traceback (most recent call last):
+
+  Cell In[20], line 1
+    plt.plot(df_unrate["DATE"], df_unrate["VALUE"])
+
+NameError: name 'df_unrate' is not defined
+
+
+
+
+
+import seaborn as sns
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = sns.load_dataset("diamonds")
+
+fig, axes = lt.subplots(2, 1, figsize=(10, 6))
+Traceback (most recent call last):
+
+  Cell In[3], line 1
+    fig, axes = lt.subplots(2, 1, figsize=(10, 6))
+
+NameError: name 'lt' is not defined
+
+
+fig, axes = plt.subplots(2, 1, figsize=(10, 6))
+
+axes[0].scatter(df['flipper_length_mm'], df['body_mass_g'])
+Traceback (most recent call last):
+
+  File ~\anaconda93\Lib\site-packages\pandas\core\indexes\base.py:3653 in get_loc
+    return self._engine.get_loc(casted_key)
+
+  File pandas\_libs\index.pyx:147 in pandas._libs.index.IndexEngine.get_loc
+
+  File pandas\_libs\index.pyx:176 in pandas._libs.index.IndexEngine.get_loc
+
+  File pandas\_libs\hashtable_class_helper.pxi:7080 in pandas._libs.hashtable.PyObjectHashTable.get_item
+
+  File pandas\_libs\hashtable_class_helper.pxi:7088 in pandas._libs.hashtable.PyObjectHashTable.get_item
+
+KeyError: 'flipper_length_mm'
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+
+  Cell In[5], line 1
+    axes[0].scatter(df['flipper_length_mm'], df['body_mass_g'])
+
+  File ~\anaconda93\Lib\site-packages\pandas\core\frame.py:3761 in __getitem__
+    indexer = self.columns.get_loc(key)
+
+  File ~\anaconda93\Lib\site-packages\pandas\core\indexes\base.py:3655 in get_loc
+    raise KeyError(key) from err
+
+KeyError: 'flipper_length_mm'
+
+
+fig, axes = plt.subplots(2, 1, figsize=(10, 6))
+
+axes[0].scatter(df['flipper_length_mm'], df['body_mass_g'])
+Traceback (most recent call last):
+
+  File ~\anaconda93\Lib\site-packages\pandas\core\indexes\base.py:3653 in get_loc
+    return self._engine.get_loc(casted_key)
+
+  File pandas\_libs\index.pyx:147 in pandas._libs.index.IndexEngine.get_loc
+
+  File pandas\_libs\index.pyx:176 in pandas._libs.index.IndexEngine.get_loc
+
+  File pandas\_libs\hashtable_class_helper.pxi:7080 in pandas._libs.hashtable.PyObjectHashTable.get_item
+
+  File pandas\_libs\hashtable_class_helper.pxi:7088 in pandas._libs.hashtable.PyObjectHashTable.get_item
+
+KeyError: 'flipper_length_mm'
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+
+  Cell In[6], line 3
+    axes[0].scatter(df['flipper_length_mm'], df['body_mass_g'])
+
+  File ~\anaconda93\Lib\site-packages\pandas\core\frame.py:3761 in __getitem__
+    indexer = self.columns.get_loc(key)
+
+  File ~\anaconda93\Lib\site-packages\pandas\core\indexes\base.py:3655 in get_loc
+    raise KeyError(key) from err
+
+KeyError: 'flipper_length_mm'
+
+
+axes[0].scatter(df['flipper_length_mm'], df['body_mass_g'])
+axes[0].set_xlabel('날개 길이(mm)')
+axes[0].set_ylabel('몸무게(g)')
+axes[0].set_title('날개와 몸무게간의 관계')
+Traceback (most recent call last):
+
+  File ~\anaconda93\Lib\site-packages\pandas\core\indexes\base.py:3653 in get_loc
+    return self._engine.get_loc(casted_key)
+
+  File pandas\_libs\index.pyx:147 in pandas._libs.index.IndexEngine.get_loc
+
+  File pandas\_libs\index.pyx:176 in pandas._libs.index.IndexEngine.get_loc
+
+  File pandas\_libs\hashtable_class_helper.pxi:7080 in pandas._libs.hashtable.PyObjectHashTable.get_item
+
+  File pandas\_libs\hashtable_class_helper.pxi:7088 in pandas._libs.hashtable.PyObjectHashTable.get_item
+
+KeyError: 'flipper_length_mm'
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+
+  Cell In[7], line 1
+    axes[0].scatter(df['flipper_length_mm'], df['body_mass_g'])
+
+  File ~\anaconda93\Lib\site-packages\pandas\core\frame.py:3761 in __getitem__
+    indexer = self.columns.get_loc(key)
+
+  File ~\anaconda93\Lib\site-packages\pandas\core\indexes\base.py:3655 in get_loc
+    raise KeyError(key) from err
+
+KeyError: 'flipper_length_mm'
+
+
+df = sns.load_dataset("penguins")
+
+fig, axes = plt.subplots(2, 1, figsize=(10, 6))
+
+fig, axes = plt.subplots(2, 1, figsize=(10, 6))
+
+axes[0].scatter(df['flipper_length_mm'], df['body_mass_g'])
+axes[0].set_xlabel('날개 길이(mm)')
+axes[0].set_ylabel('몸무게(g)')
+axes[0].set_title('날개와 몸무게간의 관계')
+Out[10]: Text(0.5, 1.0, '날개와 몸무게간의 관계')C:\Users\haruh\anaconda93\Lib\site-packages\IPython\core\events.py:93: UserWarning: Glyph 47800 (\N{HANGUL SYLLABLE MOM}) missing from current font.
+  func(*args, **kwargs)
+C:\Users\haruh\anaconda93\Lib\site-packages\IPython\core\events.py:93: UserWarning: Glyph 47924 (\N{HANGUL SYLLABLE MU}) missing from current font.
+  func(*args, **kwargs)
+C:\Users\haruh\anaconda93\Lib\site-packages\IPython\core\events.py:93: UserWarning: Glyph 44172 (\N{HANGUL SYLLABLE GE}) missing from current font.
+  func(*args, **kwargs)
+C:\Users\haruh\anaconda93\Lib\site-packages\IPython\core\events.py:93: UserWarning: Glyph 45216 (\N{HANGUL SYLLABLE NAL}) missing from current font.
+  func(*args, **kwargs)
+C:\Users\haruh\anaconda93\Lib\site-packages\IPython\core\events.py:93: UserWarning: Glyph 44060 (\N{HANGUL SYLLABLE GAE}) missing from current font.
+  func(*args, **kwargs)
+C:\Users\haruh\anaconda93\Lib\site-packages\IPython\core\events.py:93: UserWarning: Glyph 50752 (\N{HANGUL SYLLABLE WA}) missing from current font.
+  func(*args, **kwargs)
+C:\Users\haruh\anaconda93\Lib\site-packages\IPython\core\events.py:93: UserWarning: Glyph 44036 (\N{HANGUL SYLLABLE GAN}) missing from current font.
+  func(*args, **kwargs)
+C:\Users\haruh\anaconda93\Lib\site-packages\IPython\core\events.py:93: UserWarning: Glyph 51032 (\N{HANGUL SYLLABLE YI}) missing from current font.
+  func(*args, **kwargs)
+C:\Users\haruh\anaconda93\Lib\site-packages\IPython\core\events.py:93: UserWarning: Glyph 44288 (\N{HANGUL SYLLABLE GWAN}) missing from current font.
+  func(*args, **kwargs)
+C:\Users\haruh\anaconda93\Lib\site-packages\IPython\core\events.py:93: UserWarning: Glyph 44228 (\N{HANGUL SYLLABLE GYE}) missing from current font.
+  func(*args, **kwargs)
+C:\Users\haruh\anaconda93\Lib\site-packages\IPython\core\events.py:93: UserWarning: Glyph 44600 (\N{HANGUL SYLLABLE GIL}) missing from current font.
+  func(*args, **kwargs)
+C:\Users\haruh\anaconda93\Lib\site-packages\IPython\core\events.py:93: UserWarning: Glyph 51060 (\N{HANGUL SYLLABLE I}) missing from current font.
+  func(*args, **kwargs)
+C:\Users\haruh\anaconda93\Lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 47800 (\N{HANGUL SYLLABLE MOM}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+C:\Users\haruh\anaconda93\Lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 47924 (\N{HANGUL SYLLABLE MU}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+C:\Users\haruh\anaconda93\Lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 44172 (\N{HANGUL SYLLABLE GE}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+C:\Users\haruh\anaconda93\Lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 45216 (\N{HANGUL SYLLABLE NAL}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+C:\Users\haruh\anaconda93\Lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 44060 (\N{HANGUL SYLLABLE GAE}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+C:\Users\haruh\anaconda93\Lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 50752 (\N{HANGUL SYLLABLE WA}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+C:\Users\haruh\anaconda93\Lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 44036 (\N{HANGUL SYLLABLE GAN}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+C:\Users\haruh\anaconda93\Lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 51032 (\N{HANGUL SYLLABLE YI}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+C:\Users\haruh\anaconda93\Lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 44288 (\N{HANGUL SYLLABLE GWAN}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+C:\Users\haruh\anaconda93\Lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 44228 (\N{HANGUL SYLLABLE GYE}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+C:\Users\haruh\anaconda93\Lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 44600 (\N{HANGUL SYLLABLE GIL}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+C:\Users\haruh\anaconda93\Lib\site-packages\IPython\core\pylabtools.py:152: UserWarning: Glyph 51060 (\N{HANGUL SYLLABLE I}) missing from current font.
+  fig.canvas.print_figure(bytes_io, **kw)
+
+axes[1].hist(df["body_mass_g"], bins=30)
+axes[1].set_xlabel("몸무게(g)")
+axes[1].set_ylabel("Count")
+axes[1].set_title("펭귄 몸무게 분포")
+Out[11]: Text(0.5, 1.0, '펭귄 몸무게 분포')
+
+
+
+import seaborn as sns
+
+df = sns.load_dataset("diamonds")
+
+df.head()
+Out[3]: 
+   carat      cut color clarity  depth  table  price     x     y     z
+0   0.23    Ideal     E     SI2   61.5   55.0    326  3.95  3.98  2.43
+1   0.21  Premium     E     SI1   59.8   61.0    326  3.89  3.84  2.31
+2   0.23     Good     E     VS1   56.9   65.0    327  4.05  4.07  2.31
+3   0.29  Premium     I     VS2   62.4   58.0    334  4.20  4.23  2.63
+4   0.31     Good     J     SI2   63.3   58.0    335  4.34  4.35  2.75
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+plt.rc("font", family="Malgun Gothic")
+
+df.plot.scatter(
+    x="carat",
+    y="price",
+    figsize=(10, 6),
+    title="캐럿과 가격 간의 관계"
+)
+Out[6]: <Axes: title={'center': '캐럿과 가격 간의 관계'}, xlabel='carat', ylabel='price'>
+
+df.plot.scatter(
+    x="carat",
+    y="price",
+    c="cut",
+    cmap="Set2"
+)
+Out[7]: <Axes: xlabel='carat', ylabel='price'>
+
+df["price"].plot.hist(bins=20)
+Out[8]: <Axes: ylabel='Frequency'>
+
+df.groupby('color')['carat'].mean().plot.bar()
+Out[9]: <Axes: xlabel='color'>
+
+
+import seaborn as sns
+
+df = sns.load_dataset("titanic")
+
+df.head()
+Out[3]: 
+   survived  pclass     sex   age  ...  deck  embark_town  alive  alone
+0         0       3    male  22.0  ...   NaN  Southampton     no  False
+1         1       1  female  38.0  ...     C    Cherbourg    yes  False
+2         1       3  female  26.0  ...   NaN  Southampton    yes   True
+3         1       1  female  35.0  ...     C  Southampton    yes  False
+4         0       3    male  35.0  ...   NaN  Southampton     no   True
+
+[5 rows x 15 columns]
+
+sns.scatterplot(
+    data=df,
+    x="age",
+    y="fare",
+    hue="class",
+    style="class"
+)
+Out[4]: <Axes: xlabel='age', ylabel='fare'>
+
+df_pivot = df.pivot_table(
+    index="class",
+    columns="sex",
+    values="survived",
+    aggfunc="mean"
+)
+
+df_pivot
+Out[6]: 
+sex       female      male
+class                     
+First   0.968085  0.368852
+Second  0.921053  0.157407
+Third   0.500000  0.135447
+
+sns.heatmap(df_pivot, annot=True, cmap="coolwarm")
+Out[7]: <Axes: xlabel='sex', ylabel='class'>
+
+
+
+import seaborn as sns
+
+import matplotlib.pyplot as plt
+
+df = sns.load_dataset("titanic")
+
+sns.displot(
+    data=df,
+    x="age",
+    hue="class",
+    kind="hist",
+    alpha=0.3
+)
+C:\Users\haruh\anaconda93\Lib\site-packages\seaborn\axisgrid.py:118: UserWarning: The figure layout has changed to tight
+  self._figure.tight_layout(*args, **kwargs)
+Out[4]: <seaborn.axisgrid.FacetGrid at 0x13694dc0250>
+
+sns.displot(
+    data=df,
+    x="age",
+    col="class",
+    row="sex",
+    kind="hist"
+)
+C:\Users\haruh\anaconda93\Lib\site-packages\seaborn\axisgrid.py:118: UserWarning: The figure layout has changed to tight
+  self._figure.tight_layout(*args, **kwargs)
+Out[5]: <seaborn.axisgrid.FacetGrid at 0x13697a38d10>
+
+pyplot
+Traceback (most recent call last):
+
+  Cell In[6], line 1
+    pyplot
+
+NameError: name 'pyplot' is not defined
+
+
+import matplotlib.pyplot as plt
+
+plt.rc("font", family="Malgun Gothic")
+plt.rcParams["axes.unicode_minus"] = False
+
+fig, axes = plt.subplots(2, 1, figsize=(8, 6))
+
+sns.histplot(
+    data=df,
+    x="age",
+    hue="class",
+    ax=axes[0]
+)
+Out[10]: <Axes: xlabel='age', ylabel='Count'>
+
+sns.barplot(
+    data=df,
+    x="class",
+    y="age",
+    ax=axes[1]
+)
+Out[11]: <Axes: xlabel='class', ylabel='age'>
+
+
+fig, axes = plt.subplots(2, 1, figsize=(8, 6))
+
+sns.histplot(
+    data=df,
+    x="age",
+    hue="class",
+    ax=axes[0]
+)
+
+sns.barplot(
+    data=df,
+    x="class",
+    y="age",
+    ax=axes[1]
+)
+Out[12]: <Axes: xlabel='class', ylabel='age'>
