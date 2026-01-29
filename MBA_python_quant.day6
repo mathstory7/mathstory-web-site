@@ -1,1 +1,101 @@
+CREATE DATABASE shop;
+use shop;
+
+CREATE TABLE goods (
+    goods_id CHAR(4) NOT NULL,
+    goods_name VARCHAR(100) NOT NULL,
+    goods_classify VARCHAR(32) NOT NULL,
+    sell_price INTEGER,
+    buy_price INTEGER,
+    register_date DATE,
+    PRIMARY KEY (goods_id)
+);
+
+ALTER TABLE goods
+ADD COLUMN goods_name_eng VARCHAR(100);
+
+ALTER TABLE goods
+DROP COLUMN goods_name_eng;
+
+
+INSERT INTO goods VALUES ('0001', '티셔츠', '의류',     1000,  500, '2020-09-20');
+INSERT INTO goods VALUES ('0002', '펜싱기', '사무용품',  500,  320, '2020-09-11');
+INSERT INTO goods VALUES ('0003', '와이셔츠', '의류',   4000, 2800, NULL);
+INSERT INTO goods VALUES ('0004', '식칼',   '주방용품', 3000, 2800, '2020-09-20');
+INSERT INTO goods VALUES ('0005', '압력솥', '주방용품', 6800, 5000, '2020-01-15');
+INSERT INTO goods VALUES ('0006', '포크',   '주방용품',  500,  NULL, '2020-09-20');
+INSERT INTO goods VALUES ('0007', '도마',   '주방용품',  880,  790, '2020-04-28');
+INSERT INTO goods VALUES ('0008', '볼펜',   '사무용품',  100,  NULL, NULL);
+
+
+SELECT
+    goods_id AS id,
+    goods_name AS name,
+    buy_price AS price
+FROM goods;
+
+
+SELECT
+    '상품' AS category,
+    38 AS num,
+    '2022-01-01' AS date,
+    goods_id,
+    goods_name,
+    sell_price,
+    buy_price,
+    sell_price - buy_price AS profit
+FROM goods;
+
+
+SELECT
+    goods_name,
+    goods_classify,
+    register_date
+FROM goods
+WHERE register_date < '2020-09-27';
+
+
+SELECT
+    goods_name,
+    goods_classify,
+    sell_price
+FROM goods
+WHERE goods_classify = '주방용품'
+   OR sell_price >= 3000;
+
+
+SELECT COUNT(*)
+FROM goods;
+
+SELECT *
+FROM goods;
+
+SELECT COUNT(buy_price)
+FROM goods;
+
+
+CREATE VIEW goodsum (goods_classify, cnt_goods)
+AS
+SELECT
+    goods_classify,
+    COUNT(*)
+FROM goods
+GROUP BY goods_classify;
+
+SELECT *
+FROM goodsum;
+
+DROP VIEW goodsum;
+
+
+SELECT AVG(sell_price)
+FROM goods;
+
+SELECT *
+FROM goods
+WHERE sell_price > (
+    SELECT AVG(sell_price)
+    FROM goods
+);
+
 
