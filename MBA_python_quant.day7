@@ -1,1 +1,186 @@
+CREATE TABLE SampleMath (
+    m NUMERIC(10, 3),
+    n INTEGER,
+    p INTEGER
+);
 
+INSERT INTO SampleMath (m, n, p) VALUES (500, 0, NULL);
+INSERT INTO SampleMath (m, n, p) VALUES (-180, 0, NULL);
+INSERT INTO SampleMath (m, n, p) VALUES (NULL, NULL, NULL);
+INSERT INTO SampleMath (m, n, p) VALUES (NULL, 7, 3);
+INSERT INTO SampleMath (m, n, p) VALUES (NULL, 5, 2);
+INSERT INTO SampleMath (m, n, p) VALUES (NULL, 4, NULL);
+INSERT INTO SampleMath (m, n, p) VALUES (8, NULL, 3);
+INSERT INTO SampleMath (m, n, p) VALUES (2.27, 1, NULL);
+INSERT INTO SampleMath (m, n, p) VALUES (5.555, 2, NULL);
+INSERT INTO SampleMath (m, n, p) VALUES (NULL, 1, NULL);
+INSERT INTO SampleMath (m, n, p) VALUES (8.76, NULL, NULL);
+
+select * from samplemath;
+
+SELECT
+    m,
+    ABS(m) AS abs_m
+FROM SampleMath;
+
+select n, p, mod(n, p) as mod_col
+from SampleMath;
+
+CREATE TABLE SampleStr (
+    str1 VARCHAR(40),
+    str2 VARCHAR(40),
+    str3 VARCHAR(40)
+);
+
+INSERT INTO SampleStr (str1, str2, str3) VALUES ('가나다', '라마', NULL);
+INSERT INTO SampleStr (str1, str2, str3) VALUES ('abc', 'def', NULL);
+INSERT INTO SampleStr (str1, str2, str3) VALUES ('김', '철수', '입니다');
+INSERT INTO SampleStr (str1, str2, str3) VALUES ('aaa', NULL, NULL);
+INSERT INTO SampleStr (str1, str2, str3) VALUES (NULL, '가가가', NULL);
+INSERT INTO SampleStr (str1, str2, str3) VALUES ('@!#$%', NULL, NULL);
+INSERT INTO SampleStr (str1, str2, str3) VALUES ('ABC', NULL, NULL);
+INSERT INTO SampleStr (str1, str2, str3) VALUES ('aBC', NULL, NULL);
+INSERT INTO SampleStr (str1, str2, str3) VALUES ('abc철수', 'abc', 'ABC');
+INSERT INTO SampleStr (str1, str2, str3) VALUES ('abcdefabc', 'abc', 'ABC');
+INSERT INTO SampleStr (str1, str2, str3) VALUES ('아이유', '이', '유');
+
+select * from SampleStr;
+
+SELECT
+    str1,
+    str2,
+    str3,
+    REPLACE(str1, str2, str3) AS rep_str
+FROM SampleStr;
+
+
+select str1, str2, concat(str1, str2) as str_concat
+from SampleStr;
+
+
+SELECT
+    CURRENT_DATE,
+    CURRENT_TIME,
+    CURRENT_TIMESTAMP;
+
+SELECT
+    CURRENT_DATE,
+    EXTRACT(YEAR  FROM CURRENT_DATE) AS year,
+    EXTRACT(MONTH FROM CURRENT_DATE) AS month,
+    EXTRACT(DAY   FROM CURRENT_DATE) AS day;
+
+
+CREATE TABLE SampleLike (
+    strcol VARCHAR(6) NOT NULL,
+    PRIMARY KEY (strcol)
+);
+
+INSERT INTO SampleLike (strcol) VALUES ('abcddd');
+INSERT INTO SampleLike (strcol) VALUES ('dddabc');
+INSERT INTO SampleLike (strcol) VALUES ('abdddc');
+INSERT INTO SampleLike (strcol) VALUES ('abcdd');
+INSERT INTO SampleLike (strcol) VALUES ('ddabc');
+INSERT INTO SampleLike (strcol) VALUES ('abddc');
+
+SELECT * FROM SampleLike;
+
+
+select *
+from samplelike
+where strcol like '%ddd';
+
+
+select * 
+from goods 
+where sell_price between 100 and 1000;
+
+
+SELECT
+    goods_name,
+    sell_price,
+    CASE
+        WHEN sell_price >= 6000 THEN '고가'
+        WHEN sell_price >= 3000 AND sell_price < 6000 THEN '중가'
+        WHEN sell_price < 3000 THEN '저가'
+        ELSE NULL
+    END AS price_classify
+FROM goods;
+
+
+CREATE TABLE StoreGoods (
+    store_id CHAR(4) NOT NULL,
+    store_name VARCHAR(10),
+    goods_id CHAR(4) NOT NULL,
+    num INTEGER NOT NULL,
+    PRIMARY KEY (store_id, goods_id)
+);
+
+INSERT INTO StoreGoods (store_id, store_name, goods_id, num) VALUES ('000A', '서울', '0001', 10);
+INSERT INTO StoreGoods (store_id, store_name, goods_id, num) VALUES ('000A', '서울', '0002', 20);
+INSERT INTO StoreGoods (store_id, store_name, goods_id, num) VALUES ('000A', '서울', '0003', 30);
+
+INSERT INTO StoreGoods (store_id, store_name, goods_id, num) VALUES ('000B', '대전', '0002', 20);
+INSERT INTO StoreGoods (store_id, store_name, goods_id, num) VALUES ('000B', '대전', '0003', 30);
+INSERT INTO StoreGoods (store_id, store_name, goods_id, num) VALUES ('000B', '대전', '0004', 40);
+INSERT INTO StoreGoods (store_id, store_name, goods_id, num) VALUES ('000B', '대전', '0006', 60);
+INSERT INTO StoreGoods (store_id, store_name, goods_id, num) VALUES ('000B', '대전', '0007', 70);
+
+INSERT INTO StoreGoods (store_id, store_name, goods_id, num) VALUES ('000C', '부산', '0003', 30);
+INSERT INTO StoreGoods (store_id, store_name, goods_id, num) VALUES ('000C', '부산', '0004', 40);
+INSERT INTO StoreGoods (store_id, store_name, goods_id, num) VALUES ('000C', '부산', '0006', 60);
+INSERT INTO StoreGoods (store_id, store_name, goods_id, num) VALUES ('000C', '부산', '0007', 70);
+
+INSERT INTO StoreGoods (store_id, store_name, goods_id, num) VALUES ('000D', '대구', '0001', 10);
+
+select * from storegoods;
+
+
+SELECT * FROM goods;
+
+SELECT * FROM storegoods;
+
+SELECT * 
+FROM storegoods AS store
+INNER JOIN goods AS goods
+ON store.goods_id = goods.goods_id;
+
+
+SELECT DISTINCT(goods_id)
+FROM StoreGoods;
+
+SELECT DISTINCT(goods_id)
+FROM goods;
+
+SELECT
+    store.store_id,
+    store.store_name,
+    goods.goods_id,
+    goods.goods_name,
+    goods.sell_price
+FROM StoreGoods AS store
+LEFT OUTER JOIN goods AS goods
+ON store.goods_id = goods.goods_id;
+
+
+select goods_name, goods_classify, sell_price,
+	rank() over (partition by goods_classify order by sell_price) as ranking
+from Goods;
+
+
+SELECT
+    goods_name,
+    goods_classify,
+    sell_price,
+    RANK() OVER (ORDER BY sell_price) AS ranking,
+    DENSE_RANK() OVER (ORDER BY sell_price) AS ranking_dense,
+    ROW_NUMBER() OVER (ORDER BY sell_price) AS ranking_row
+FROM goods;
+
+
+select goods_id, goods_classify, goods_name, sell_price,
+	avg(sell_price) over(order by goods_id rows 2 preceding) as moving_avg
+from Goods;
+
+select goods_id, goods_classify, goods_name, sell_price,
+	avg(sell_price) over(order by goods_id rows between current row and 2 following) as moving_avg
+    from Goods;
