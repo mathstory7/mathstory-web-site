@@ -1,1 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Crawling HTML/CSS Practice</title>
+
+  <style>
+    body {
+      background-color: powderblue;
+    }
+
+    h4 {
+      color: blue;
+    }
+
+    .language {
+      background-color: tomato;
+      color: white;
+      padding: 10px;
+    }
+
+    .desc {
+      background-color: moccasin;
+      color: black;
+      padding: 10px;
+    }
+
+    #myHeader {
+      background-color: lightblue;
+      color: black;
+      padding: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ID 예제 -->
+  <h1 id="myHeader">Quant Crawling Practice</h1>
+
+  <!-- h, p 태그 -->
+  <h2>Headings & Paragraphs</h2>
+  <h3>Quant Portfolio</h3>
+  <p>By Henry</p>
+
+  <!-- 리스트 -->
+  <h2>Unordered List</h2>
+  <ul>
+    <li>Python</li>
+    <li>SQL</li>
+    <li>Crawling</li>
+  </ul>
+
+  <h2>Ordered List</h2>
+  <ol>
+    <li>Python</li>
+    <li>SQL</li>
+    <li>Crawling</li>
+  </ol>
+
+  <!-- 테이블 -->
+  <h2>Table Example</h2>
+  <table border="1">
+    <tr>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+    <tr>
+      <td>a</td>
+      <td>b</td>
+      <td>c</td>
+    </tr>
+    <tr>
+      <td>ABC</td>
+      <td>ABC</td>
+      <td>ABC</td>
+    </tr>
+  </table>
+
+  <!-- 링크 -->
+  <h2>Link</h2>
+  <a href="https://www.google.com">Go to Google</a>
+
+  <!-- 이미지 -->
+  <h2>Image</h2>
+  <img src="https://www.w3schools.com/images/w3schools_green.jpg" width="200" height="200">
+
+  <!-- div + class -->
+  <div class="language">
+    <h2>Python</h2>
+    <p>Data Crawling</p>
+  </div>
+
+  <div class="desc">
+    <h2>SQL</h2>
+    <p>Database Query</p>
+  </div>
+
+  <div>
+    <h2>HTML</h2>
+    <p>Web Structure</p>
+  </div>
+
+  <!-- h4 CSS 확인 -->
+  <h4>This is h4 tag (CSS applied)</h4>
+
+</body>
+</html>
 
