@@ -1,1 +1,468 @@
+import requests as rq
 
+url = 'https://quotes.toscrape.com/'
+res = rq.get(url)
+
+from bs4 import BeautifulSoup
+
+soup = BeautifulSoup(res.content, 'html.parser')
+
+quote_div = soup.find_all('div', class_='quote')
+
+quote_text = [q.find('span', class_='text').text for q in quote_div]
+
+quote_author = [q.find('small', class_='author').text for q in quote_div]
+
+quote_text
+Out[8]: 
+['“The world as we have created it is a process of our thinking. It cannot be changed without changing our thinking.”',
+ '“It is our choices, Harry, that show what we truly are, far more than our abilities.”',
+ '“There are only two ways to live your life. One is as though nothing is a miracle. The other is as though everything is a miracle.”',
+ '“The person, be it gentleman or lady, who has not pleasure in a good novel, must be intolerably stupid.”',
+ "“Imperfection is beauty, madness is genius and it's better to be absolutely ridiculous than absolutely boring.”",
+ '“Try not to become a man of success. Rather become a man of value.”',
+ '“It is better to be hated for what you are than to be loved for what you are not.”',
+ "“I have not failed. I've just found 10,000 ways that won't work.”",
+ "“A woman is like a tea bag; you never know how strong it is until it's in hot water.”",
+ '“A day without sunshine is like, you know, night.”']
+
+quote_author
+Out[9]: 
+['Albert Einstein',
+ 'J.K. Rowling',
+ 'Albert Einstein',
+ 'Jane Austen',
+ 'Marilyn Monroe',
+ 'Albert Einstein',
+ 'André Gide',
+ 'Thomas A. Edison',
+ 'Eleanor Roosevelt',
+ 'Steve Martin']
+
+quote_link
+Traceback (most recent call last):
+
+  Cell In[10], line 1
+    quote_link
+
+NameError: name 'quote_link' is not defined
+
+
+quote_div
+Out[11]: 
+[<div class="quote" itemscope="" itemtype="http://schema.org/CreativeWork">
+ <span class="text" itemprop="text">“The world as we have created it is a process of our thinking. It cannot be changed without changing our thinking.”</span>
+ <span>by <small class="author" itemprop="author">Albert Einstein</small>
+ <a href="/author/Albert-Einstein">(about)</a>
+ </span>
+ <div class="tags">
+             Tags:
+             <meta class="keywords" content="change,deep-thoughts,thinking,world" itemprop="keywords"/>
+ <a class="tag" href="/tag/change/page/1/">change</a>
+ <a class="tag" href="/tag/deep-thoughts/page/1/">deep-thoughts</a>
+ <a class="tag" href="/tag/thinking/page/1/">thinking</a>
+ <a class="tag" href="/tag/world/page/1/">world</a>
+ </div>
+ </div>,
+ <div class="quote" itemscope="" itemtype="http://schema.org/CreativeWork">
+ <span class="text" itemprop="text">“It is our choices, Harry, that show what we truly are, far more than our abilities.”</span>
+ <span>by <small class="author" itemprop="author">J.K. Rowling</small>
+ <a href="/author/J-K-Rowling">(about)</a>
+ </span>
+ <div class="tags">
+             Tags:
+             <meta class="keywords" content="abilities,choices" itemprop="keywords"/>
+ <a class="tag" href="/tag/abilities/page/1/">abilities</a>
+ <a class="tag" href="/tag/choices/page/1/">choices</a>
+ </div>
+ </div>,
+ <div class="quote" itemscope="" itemtype="http://schema.org/CreativeWork">
+ <span class="text" itemprop="text">“There are only two ways to live your life. One is as though nothing is a miracle. The other is as though everything is a miracle.”</span>
+ <span>by <small class="author" itemprop="author">Albert Einstein</small>
+ <a href="/author/Albert-Einstein">(about)</a>
+ </span>
+ <div class="tags">
+             Tags:
+             <meta class="keywords" content="inspirational,life,live,miracle,miracles" itemprop="keywords"/>
+ <a class="tag" href="/tag/inspirational/page/1/">inspirational</a>
+ <a class="tag" href="/tag/life/page/1/">life</a>
+ <a class="tag" href="/tag/live/page/1/">live</a>
+ <a class="tag" href="/tag/miracle/page/1/">miracle</a>
+ <a class="tag" href="/tag/miracles/page/1/">miracles</a>
+ </div>
+ </div>,
+ <div class="quote" itemscope="" itemtype="http://schema.org/CreativeWork">
+ <span class="text" itemprop="text">“The person, be it gentleman or lady, who has not pleasure in a good novel, must be intolerably stupid.”</span>
+ <span>by <small class="author" itemprop="author">Jane Austen</small>
+ <a href="/author/Jane-Austen">(about)</a>
+ </span>
+ <div class="tags">
+             Tags:
+             <meta class="keywords" content="aliteracy,books,classic,humor" itemprop="keywords"/>
+ <a class="tag" href="/tag/aliteracy/page/1/">aliteracy</a>
+ <a class="tag" href="/tag/books/page/1/">books</a>
+ <a class="tag" href="/tag/classic/page/1/">classic</a>
+ <a class="tag" href="/tag/humor/page/1/">humor</a>
+ </div>
+ </div>,
+ <div class="quote" itemscope="" itemtype="http://schema.org/CreativeWork">
+ <span class="text" itemprop="text">“Imperfection is beauty, madness is genius and it's better to be absolutely ridiculous than absolutely boring.”</span>
+ <span>by <small class="author" itemprop="author">Marilyn Monroe</small>
+ <a href="/author/Marilyn-Monroe">(about)</a>
+ </span>
+ <div class="tags">
+             Tags:
+             <meta class="keywords" content="be-yourself,inspirational" itemprop="keywords"/>
+ <a class="tag" href="/tag/be-yourself/page/1/">be-yourself</a>
+ <a class="tag" href="/tag/inspirational/page/1/">inspirational</a>
+ </div>
+ </div>,
+ <div class="quote" itemscope="" itemtype="http://schema.org/CreativeWork">
+ <span class="text" itemprop="text">“Try not to become a man of success. Rather become a man of value.”</span>
+ <span>by <small class="author" itemprop="author">Albert Einstein</small>
+ <a href="/author/Albert-Einstein">(about)</a>
+ </span>
+ <div class="tags">
+             Tags:
+             <meta class="keywords" content="adulthood,success,value" itemprop="keywords"/>
+ <a class="tag" href="/tag/adulthood/page/1/">adulthood</a>
+ <a class="tag" href="/tag/success/page/1/">success</a>
+ <a class="tag" href="/tag/value/page/1/">value</a>
+ </div>
+ </div>,
+ <div class="quote" itemscope="" itemtype="http://schema.org/CreativeWork">
+ <span class="text" itemprop="text">“It is better to be hated for what you are than to be loved for what you are not.”</span>
+ <span>by <small class="author" itemprop="author">André Gide</small>
+ <a href="/author/Andre-Gide">(about)</a>
+ </span>
+ <div class="tags">
+             Tags:
+             <meta class="keywords" content="life,love" itemprop="keywords"/>
+ <a class="tag" href="/tag/life/page/1/">life</a>
+ <a class="tag" href="/tag/love/page/1/">love</a>
+ </div>
+ </div>,
+ <div class="quote" itemscope="" itemtype="http://schema.org/CreativeWork">
+ <span class="text" itemprop="text">“I have not failed. I've just found 10,000 ways that won't work.”</span>
+ <span>by <small class="author" itemprop="author">Thomas A. Edison</small>
+ <a href="/author/Thomas-A-Edison">(about)</a>
+ </span>
+ <div class="tags">
+             Tags:
+             <meta class="keywords" content="edison,failure,inspirational,paraphrased" itemprop="keywords"/>
+ <a class="tag" href="/tag/edison/page/1/">edison</a>
+ <a class="tag" href="/tag/failure/page/1/">failure</a>
+ <a class="tag" href="/tag/inspirational/page/1/">inspirational</a>
+ <a class="tag" href="/tag/paraphrased/page/1/">paraphrased</a>
+ </div>
+ </div>,
+ <div class="quote" itemscope="" itemtype="http://schema.org/CreativeWork">
+ <span class="text" itemprop="text">“A woman is like a tea bag; you never know how strong it is until it's in hot water.”</span>
+ <span>by <small class="author" itemprop="author">Eleanor Roosevelt</small>
+ <a href="/author/Eleanor-Roosevelt">(about)</a>
+ </span>
+ <div class="tags">
+             Tags:
+             <meta class="keywords" content="misattributed-eleanor-roosevelt" itemprop="keywords"/>
+ <a class="tag" href="/tag/misattributed-eleanor-roosevelt/page/1/">misattributed-eleanor-roosevelt</a>
+ </div>
+ </div>,
+ <div class="quote" itemscope="" itemtype="http://schema.org/CreativeWork">
+ <span class="text" itemprop="text">“A day without sunshine is like, you know, night.”</span>
+ <span>by <small class="author" itemprop="author">Steve Martin</small>
+ <a href="/author/Steve-Martin">(about)</a>
+ </span>
+ <div class="tags">
+             Tags:
+             <meta class="keywords" content="humor,obvious,simile" itemprop="keywords"/>
+ <a class="tag" href="/tag/humor/page/1/">humor</a>
+ <a class="tag" href="/tag/obvious/page/1/">obvious</a>
+ <a class="tag" href="/tag/simile/page/1/">simile</a>
+ </div>
+ </div>]
+
+
+
+runfile('C:/Users/haruh/untitled7.py', wdir='C:/Users/haruh')
+
+import requests as rq
+
+from bs4 import BeautifulSoup
+
+url = "https://finance.naver.com/news/news_list.nhn?mode=LSS2D&section_id=101&section_id2=258"
+
+data = rq.get(url)
+
+html = BeautifulSoup(data.content, "html.parser")
+
+html_select = html.select("dl dd.articleSubject > a")
+
+titles = [i["title"] for i in html_select]
+
+titles
+Out[9]: 
+['이틀간 반등했던 은값 17% 폭락, 다시 주말 수준으로(상보)',
+ '크래프톤, 신작 ‘PUBG: 블라인드스팟’ 스팀 얼리액세스',
+ '이억원 "주가조작 신고포상금, 예비비 동원해서라도 확보"',
+ '[티타임] 코스피, 낙폭 키워 5200선 오르내려… 개인 5조원대 매수',
+ '신한금융, 역대 최대 순익…5조 클럽엔 280억 모자라',
+ "머스크 우주에 데이터센터 추진…우주 태양광주 '요동' [마켓딥다이브]",
+ '하나證, IRP 1년 수익률 21%…"증권업 1위"',
+ '이니텍, 아임솔텍과 증권 분야 총판 계약…제로트러스트·CNAPP 시장 공략',
+ '에코프로비엠, 작년 영업익 1천428억원…유럽시장 회복에 흑자 전환(종합)',
+ '신한증권, 지난해 순이익 3816억…113.0%↑',
+ 'LX세미콘, 작년 4Q 영업이익 249억…전년 동기 比 18.4% 감소',
+ '"나스닥지수 빨리 들어갈래"…스페이스X, 조기 편입 추진',
+ '신한금융그룹, 2025년 연간 당기순이익 +11.7%…사상 첫 주주환원율 50% 돌파',
+ '이찬진 “주가조작은 패가망신 귀결...시장감시·기획조사·강제수사로 엄단”',
+ '1460원에 거래되는 달러',
+ '한화솔루션 작년 영업손실 3천533억원…적자 확대(종합)',
+ '원·달러 환율 1460원대 진입',
+ '강달러·엔화 약세에 환율 상승',
+ '달러 강세·엔화 약세에 환율 1460원대로',
+ '강달러·엔화 약세에 환율 상승']
+
+
+
+import requests as rq
+
+from bs4 import BeautifulSoup
+
+import pandas as pd
+
+url
+Traceback (most recent call last):
+
+  Cell In[4], line 1
+    url
+
+NameError: name 'url' is not defined
+
+
+url = 'https://kind.krx.co.kr/disclosure/todaydisclosure.do'
+
+payload = {
+    'method': 'searchTodayDisclosureSub',
+    'currentPageSize': '15',
+    'pageIndex': '1',
+    'orderMode': '0',
+    'orderStat': 'D',
+    'forward': 'todaydisclosure_sub',
+    'chose': 'S',
+    'todayFlag': 'N',
+    'selDate': '2023-01-10'
+}
+
+res = rq.post(url, data=payload)
+
+res
+Out[8]: <Response [200]>
+
+soup = BeautifulSoup(res.content, 'html.parser')
+
+soup
+Out[10]: 
+
+<section class="scrarea type-00">
+<table class="list type-00 mt10" summary="시간, 회사명, 공시제목, 제출인, 차트/주가">
+<caption>목록</caption>
+<colgroup>
+<col width="9%"/>
+<col width="22%"/>
+<col width="*"/>
+<col width="16%"/>
+<col width="9%"/>
+</colgroup>
+<thead>
+<tr class="first active" id="title-contents">
+</tr>
+</thead>
+<tbody>
+<tr class="first" id="parkman">
+<td class="first txc">18:41</td>
+<td><img alt="코스닥" class="vmiddle legend" src="/images/common/icn_t_ko.gif"/> <a href="#companysum" id="companysum" onclick="companysummary_open('29066'); return false;" title="네오펙트"> 네오펙트</a> <img alt="투자경고종목" class="vmiddle legend" src="/images/common/icn_t_kyung.gif"> </img></td>
+<td><a href="#viewer" onclick="openDisclsViewer('20230110000620','')" title="유상증자결정(제3자배정-소액공모)"><font color="#FF8040">[정정]</font>유상증자결정(제3자배정-소액공모) <img alt="해당보고서 이후에 정정된 보고서 있음" class="vmiddle legend" src="/images/common/icn_t_jung.gif"/></a></td>
+<td>네오펙트</td>
+<td class="txc">
+<a class="btn ico chart-00" href="#" onclick="openDisclsChart('29066');return false;" title="공시차트"><span>공시차트</span></a>
+<a class="btn ico chart-01" href="#" onclick="fnPopStockPrices('29066');return false;" title="주가차트"><span>주가차트</span></a>
+</td>
+</tr>
+<tr id="parkman">
+<td class="first txc">18:20</td>
+<td><img alt="코스닥" class="vmiddle legend" src="/images/common/icn_t_ko.gif"/> <a href="#companysum" id="companysum" onclick="companysummary_open('23769'); return false;" title="에스티팜"> 에스티팜</a> <img alt="KOSDAQ150" class="vmiddle legend" src="/images/common/icn_t_q150.gif"/> <img alt="KRX300" class="vmiddle legend" src="/images/common/icn_t_x300.gif"/> </td>
+<td><a href="#viewer" onclick="openDisclsViewer('20230110000617','')" title="공매도 과열종목 지정(공매도 거래 금지 적용)">공매도 과열종목 지정(공매도 거래 금지 적용)</a></td>
+<td>코스닥시장본부</td>
+<td class="txc">
+<a class="btn ico chart-00" href="#" onclick="openDisclsChart('23769');return false;" title="공시차트"><span>공시차트</span></a>
+<a class="btn ico chart-01" href="#" onclick="fnPopStockPrices('23769');return false;" title="주가차트"><span>주가차트</span></a>
+</td>
+</tr>
+<tr id="parkman">
+<td class="first txc">18:11</td>
+<td></td>
+<td><a href="#viewer" onclick="openDisclsViewer('20230110000611','')" title="직전1개월 일평균대비 거래량 증가율 상위 10종목(코스닥시장)">직전1개월 일평균대비 거래량 증가율 상위 10종목(코스닥시장)</a></td>
+<td>코스닥시장본부</td>
+<td class="txc">
+</td>
+</tr>
+<tr id="parkman">
+<td class="first txc">18:11</td>
+<td></td>
+<td><a href="#viewer" onclick="openDisclsViewer('20230110000610','')" title="최근 20일중 최저(최고)가 대비 상승(하락)율 상위 10종목(코스닥시장)">최근 20일중 최저(최고)가 대비 상승(하락)율 상위 10종목(코스닥시장)</a></td>
+<td>코스닥시장본부</td>
+<td class="txc">
+</td>
+</tr>
+<tr id="parkman">
+<td class="first txc">18:11</td>
+<td></td>
+<td><a href="#viewer" onclick="openDisclsViewer('20230110000612','')" title="대량매매내역(코스닥시장)">대량매매내역(코스닥시장)</a></td>
+<td>코스닥시장본부</td>
+<td class="txc">
+</td>
+</tr>
+<tr id="parkman">
+<td class="first txc">18:11</td>
+<td></td>
+<td><a href="#viewer" onclick="openDisclsViewer('20230110000608','')" title="일일회전율상위20종목(코스닥시장)">일일회전율상위20종목(코스닥시장)</a></td>
+<td>코스닥시장본부</td>
+<td class="txc">
+</td>
+</tr>
+<tr id="parkman">
+<td class="first txc">18:11</td>
+<td></td>
+<td><a href="#viewer" onclick="openDisclsViewer('20230110000609','')" title="일중 변동성 상위 10종목(코스닥시장)">일중 변동성 상위 10종목(코스닥시장)</a></td>
+<td>코스닥시장본부</td>
+<td class="txc">
+</td>
+</tr>
+<tr id="parkman">
+<td class="first txc">18:10</td>
+<td></td>
+<td><a href="#viewer" onclick="openDisclsViewer('20230110000613','')" title="자기주식매매신청내역(코스닥시장)">자기주식매매신청내역(코스닥시장)</a></td>
+<td>코스닥시장본부</td>
+<td class="txc">
+</td>
+</tr>
+<tr id="parkman">
+<td class="first txc">18:10</td>
+<td></td>
+<td><a href="#viewer" onclick="openDisclsViewer('20230110000602','')" title="자기주식매매체결내역(코스닥시장)">자기주식매매체결내역(코스닥시장)</a></td>
+<td>코스닥시장본부</td>
+<td class="txc">
+</td>
+</tr>
+<tr id="parkman">
+<td class="first txc">18:09</td>
+<td><img alt="코스닥" class="vmiddle legend" src="/images/common/icn_t_ko.gif"/> <a href="#companysum" id="companysum" onclick="companysummary_open('05418'); return false;" title="메디콕스"> 메디콕스</a> <img alt="관리종목" class="vmiddle legend" src="/images/common/icn_t_kwan.gif"> <img alt="투자주의환기종목" class="vmiddle legend" src="/images/common/icn_t_hwan.gif"/> </img></td>
+<td><a href="#viewer" onclick="openDisclsViewer('20230110000615','')" title="유상증자결정(제3자배정-소액)"><font color="#FF8040">[정정]</font>유상증자결정(제3자배정-소액)</a></td>
+<td>메디콕스</td>
+<td class="txc">
+<a class="btn ico chart-00" href="#" onclick="openDisclsChart('05418');return false;" title="공시차트"><span>공시차트</span></a>
+<a class="btn ico chart-01" href="#" onclick="fnPopStockPrices('05418');return false;" title="주가차트"><span>주가차트</span></a>
+</td>
+</tr>
+<tr id="parkman">
+<td class="first txc">18:09</td>
+<td><img alt="유가증권" class="vmiddle legend" src="/images/common/icn_t_yu.gif"/> <a href="#companysum" id="companysum" onclick="companysummary_open('09043'); return false;" title="아모레퍼시픽"> 아모레퍼시픽</a> <img alt="V100" class="vmiddle legend" src="/images/common/icn_t_v100.gif"/> <img alt="KOSPI200" class="vmiddle legend" src="/images/common/icn_t_k200.gif"/> <img alt="KRX300" class="vmiddle legend" src="/images/common/icn_t_x300.gif"/> <img alt="KTOP30" class="vmiddle legend" src="/images/common/icn_t_ktop.gif"/> </td>
+<td><a href="#viewer" onclick="openDisclsViewer('20230110000616','')" title="공매도 과열종목 지정(공매도 거래 금지 적용)">공매도 과열종목 지정(공매도 거래 금지 적용)</a></td>
+<td>유가증권시장본부</td>
+<td class="txc">
+<a class="btn ico chart-00" href="#" onclick="openDisclsChart('09043');return false;" title="공시차트"><span>공시차트</span></a>
+<a class="btn ico chart-01" href="#" onclick="fnPopStockPrices('09043');return false;" title="주가차트"><span>주가차트</span></a>
+</td>
+</tr>
+<tr id="parkman">
+<td class="first txc">18:08</td>
+<td></td>
+<td><a href="#viewer" onclick="openDisclsViewer('20230110000614','')" title="자기주식매매 신청내역(유가증권시장)">자기주식매매 신청내역(유가증권시장)</a></td>
+<td>유가증권시장본부</td>
+<td class="txc">
+</td>
+</tr>
+<tr id="parkman">
+<td class="first txc">18:06</td>
+<td></td>
+<td><a href="#viewer" onclick="openDisclsViewer('20230110000607','')" title="일일 회전율 상위 20종목-ELW포함(유가증권시장)">일일 회전율 상위 20종목-ELW포함(유가증권시장)</a></td>
+<td>유가증권시장본부</td>
+<td class="txc">
+</td>
+</tr>
+<tr id="parkman">
+<td class="first txc">18:06</td>
+<td></td>
+<td><a href="#viewer" onclick="openDisclsViewer('20230110000605','')" title="일일 회전율 상위 20종목-ELW제외(유가증권시장)">일일 회전율 상위 20종목-ELW제외(유가증권시장)</a></td>
+<td>유가증권시장본부</td>
+<td class="txc">
+</td>
+</tr>
+<tr id="parkman">
+<td class="first txc">18:06</td>
+<td></td>
+<td><a href="#viewer" onclick="openDisclsViewer('20230110000606','')" title="대량매매내역(유가증권시장)">대량매매내역(유가증권시장)</a></td>
+<td>유가증권시장본부</td>
+<td class="txc">
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<!-- 페이징 START -->
+<section class="paging-group">
+<div class="paging type-00"><a class="pprev" href="#prevPage10" onclick="return false;"><span>이전10개 페이지</span></a><a class="prev" href="#prevPage" onclick="return false;"><span>이전 페이지</span></a>
+<a class="active" href="#page_link_1" onclick="return false;">1</a><a href="#page_link_2" onclick="fnPageGo('2');return false;">2</a><a href="#page_link_3" onclick="fnPageGo('3');return false;">3</a><a href="#page_link_4" onclick="fnPageGo('4');return false;">4</a><a href="#page_link_5" onclick="fnPageGo('5');return false;">5</a><a href="#page_link_6" onclick="fnPageGo('6');return false;">6</a><a href="#page_link_7" onclick="fnPageGo('7');return false;">7</a><a href="#page_link_8" onclick="fnPageGo('8');return false;">8</a><a href="#page_link_9" onclick="fnPageGo('9');return false;">9</a><a href="#page_link_10" onclick="fnPageGo('10');return false;">10</a>
+<a class="next" href="#nextPage" onclick="fnPageGo('2');return false;"><span>다음 페이지</span></a><a class="nnext" href="#nextPage10" onclick="fnPageGo('11');return false;"><span>다음10개 페이지</span></a></div><div class="info type-00">
+전체 <em>386</em>건 : <strong>1</strong>/26   
+<select id="currentPageSize" name="currentPageSize">
+<option selected="selected" value="15">15건</option>
+<option value="30">30건</option>
+<option value="50">50건</option>
+<option value="100">100건</option>
+</select>  <a class="btn-sprite btn-go vmiddle" href="#" onclick="fnSearch1();return false;" title="GO"><span>GO</span></a>
+</div>
+</section>
+<!-- 페이징 END -->
+<script type="text/JavaScript">
+$(document).ready(function(){
+	var svrGubun = "real2";
+	if( svrGubun.indexOf("dr") >= 0 ){
+		fn_InitTitle("시간,회사명,공시제목,제출인", "true,true,true,true");
+	} else {
+		fn_InitTitle("시간,회사명,공시제목,제출인,차트/주가", "true,true,true,true,false");
+	}
+
+	$("input[name='segment']:radio").change(function(){
+		console.log(this.value);
+		$("#searchForm > #kosdaqSegment").val(this.value);
+		fnSearch();
+	});
+});
+</script>
+
+html_unicode = soup.prettify()
+
+html_unicode
+Out[12]: '<section class="scrarea type-00">\n <table class="list type-00 mt10" summary="시간, 회사명, 공시제목, 제출인, 차트/주가">\n  <caption>\n   목록\n  </caption>\n  <colgroup>\n   <col width="9%"/>\n   <col width="22%"/>\n   <col width="*"/>\n   <col width="16%"/>\n   <col width="9%"/>\n  </colgroup>\n  <thead>\n   <tr class="first active" id="title-contents">\n   </tr>\n  </thead>\n  <tbody>\n   <tr class="first" id="parkman">\n    <td class="first txc">\n     18:41\n    </td>\n    <td>\n     <img alt="코스닥" class="vmiddle legend" src="/images/common/icn_t_ko.gif"/>\n     <a href="#companysum" id="companysum" onclick="companysummary_open(\'29066\'); return false;" title="네오펙트">\n      네오펙트\n     </a>\n     <img alt="투자경고종목" class="vmiddle legend" src="/images/common/icn_t_kyung.gif">\n     </img>\n    </td>\n    <td>\n     <a href="#viewer" onclick="openDisclsViewer(\'20230110000620\',\'\')" title="유상증자결정(제3자배정-소액공모)">\n      <font color="#FF8040">\n       [정정]\n      </font>\n      유상증자결정(제3자배정-소액공모)\n      <img alt="해당보고서 이후에 정정된 보고서 있음" class="vmiddle legend" src="/images/common/icn_t_jung.gif"/>\n     </a>\n    </td>\n    <td>\n     네오펙트\n    </td>\n    <td class="txc">\n     <a class="btn ico chart-00" href="#" onclick="openDisclsChart(\'29066\');return false;" title="공시차트">\n      <span>\n       공시차트\n      </span>\n     </a>\n     <a class="btn ico chart-01" href="#" onclick="fnPopStockPrices(\'29066\');return false;" title="주가차트">\n      <span>\n       주가차트\n      </span>\n     </a>\n    </td>\n   </tr>\n   <tr id="parkman">\n    <td class="first txc">\n     18:20\n    </td>\n    <td>\n     <img alt="코스닥" class="vmiddle legend" src="/images/common/icn_t_ko.gif"/>\n     <a href="#companysum" id="companysum" onclick="companysummary_open(\'23769\'); return false;" title="에스티팜">\n      에스티팜\n     </a>\n     <img alt="KOSDAQ150" class="vmiddle legend" src="/images/common/icn_t_q150.gif"/>\n     <img alt="KRX300" class="vmiddle legend" src="/images/common/icn_t_x300.gif"/>\n    </td>\n    <td>\n     <a href="#viewer" onclick="openDisclsViewer(\'20230110000617\',\'\')" title="공매도 과열종목 지정(공매도 거래 금지 적용)">\n      공매도 과열종목 지정(공매도 거래 금지 적용)\n     </a>\n    </td>\n    <td>\n     코스닥시장본부\n    </td>\n    <td class="txc">\n     <a class="btn ico chart-00" href="#" onclick="openDisclsChart(\'23769\');return false;" title="공시차트">\n      <span>\n       공시차트\n      </span>\n     </a>\n     <a class="btn ico chart-01" href="#" onclick="fnPopStockPrices(\'23769\');return false;" title="주가차트">\n      <span>\n       주가차트\n      </span>\n     </a>\n    </td>\n   </tr>\n   <tr id="parkman">\n    <td class="first txc">\n     18:11\n    </td>\n    <td>\n    </td>\n    <td>\n     <a href="#viewer" onclick="openDisclsViewer(\'20230110000611\',\'\')" title="직전1개월 일평균대비 거래량 증가율 상위 10종목(코스닥시장)">\n      직전1개월 일평균대비 거래량 증가율 상위 10종목(코스닥시장)\n     </a>\n    </td>\n    <td>\n     코스닥시장본부\n    </td>\n    <td class="txc">\n    </td>\n   </tr>\n   <tr id="parkman">\n    <td class="first txc">\n     18:11\n    </td>\n    <td>\n    </td>\n    <td>\n     <a href="#viewer" onclick="openDisclsViewer(\'20230110000610\',\'\')" title="최근 20일중 최저(최고)가 대비 상승(하락)율 상위 10종목(코스닥시장)">\n      최근 20일중 최저(최고)가 대비 상승(하락)율 상위 10종목(코스닥시장)\n     </a>\n    </td>\n    <td>\n     코스닥시장본부\n    </td>\n    <td class="txc">\n    </td>\n   </tr>\n   <tr id="parkman">\n    <td class="first txc">\n     18:11\n    </td>\n    <td>\n    </td>\n    <td>\n     <a href="#viewer" onclick="openDisclsViewer(\'20230110000612\',\'\')" title="대량매매내역(코스닥시장)">\n      대량매매내역(코스닥시장)\n     </a>\n    </td>\n    <td>\n     코스닥시장본부\n    </td>\n    <td class="txc">\n    </td>\n   </tr>\n   <tr id="parkman">\n    <td class="first txc">\n     18:11\n    </td>\n    <td>\n    </td>\n    <td>\n     <a href="#viewer" onclick="openDisclsViewer(\'20230110000608\',\'\')" title="일일회전율상위20종목(코스닥시장)">\n      일일회전율상위20종목(코스닥시장)\n     </a>\n    </td>\n    <td>\n     코스닥시장본부\n    </td>\n    <td class="txc">\n    </td>\n   </tr>\n   <tr id="parkman">\n    <td class="first txc">\n     18:11\n    </td>\n    <td>\n    </td>\n    <td>\n     <a href="#viewer" onclick="openDisclsViewer(\'20230110000609\',\'\')" title="일중 변동성 상위 10종목(코스닥시장)">\n      일중 변동성 상위 10종목(코스닥시장)\n     </a>\n    </td>\n    <td>\n     코스닥시장본부\n    </td>\n    <td class="txc">\n    </td>\n   </tr>\n   <tr id="parkman">\n    <td class="first txc">\n     18:10\n    </td>\n    <td>\n    </td>\n    <td>\n     <a href="#viewer" onclick="openDisclsViewer(\'20230110000613\',\'\')" title="자기주식매매신청내역(코스닥시장)">\n      자기주식매매신청내역(코스닥시장)\n     </a>\n    </td>\n    <td>\n     코스닥시장본부\n    </td>\n    <td class="txc">\n    </td>\n   </tr>\n   <tr id="parkman">\n    <td class="first txc">\n     18:10\n    </td>\n    <td>\n    </td>\n    <td>\n     <a href="#viewer" onclick="openDisclsViewer(\'20230110000602\',\'\')" title="자기주식매매체결내역(코스닥시장)">\n      자기주식매매체결내역(코스닥시장)\n     </a>\n    </td>\n    <td>\n     코스닥시장본부\n    </td>\n    <td class="txc">\n    </td>\n   </tr>\n   <tr id="parkman">\n    <td class="first txc">\n     18:09\n    </td>\n    <td>\n     <img alt="코스닥" class="vmiddle legend" src="/images/common/icn_t_ko.gif"/>\n     <a href="#companysum" id="companysum" onclick="companysummary_open(\'05418\'); return false;" title="메디콕스">\n      메디콕스\n     </a>\n     <img alt="관리종목" class="vmiddle legend" src="/images/common/icn_t_kwan.gif">\n      <img alt="투자주의환기종목" class="vmiddle legend" src="/images/common/icn_t_hwan.gif"/>\n     </img>\n    </td>\n    <td>\n     <a href="#viewer" onclick="openDisclsViewer(\'20230110000615\',\'\')" title="유상증자결정(제3자배정-소액)">\n      <font color="#FF8040">\n       [정정]\n      </font>\n      유상증자결정(제3자배정-소액)\n     </a>\n    </td>\n    <td>\n     메디콕스\n    </td>\n    <td class="txc">\n     <a class="btn ico chart-00" href="#" onclick="openDisclsChart(\'05418\');return false;" title="공시차트">\n      <span>\n       공시차트\n      </span>\n     </a>\n     <a class="btn ico chart-01" href="#" onclick="fnPopStockPrices(\'05418\');return false;" title="주가차트">\n      <span>\n       주가차트\n      </span>\n     </a>\n    </td>\n   </tr>\n   <tr id="parkman">\n    <td class="first txc">\n     18:09\n    </td>\n    <td>\n     <img alt="유가증권" class="vmiddle legend" src="/images/common/icn_t_yu.gif"/>\n     <a href="#companysum" id="companysum" onclick="companysummary_open(\'09043\'); return false;" title="아모레퍼시픽">\n      아모레퍼시픽\n     </a>\n     <img alt="V100" class="vmiddle legend" src="/images/common/icn_t_v100.gif"/>\n     <img alt="KOSPI200" class="vmiddle legend" src="/images/common/icn_t_k200.gif"/>\n     <img alt="KRX300" class="vmiddle legend" src="/images/common/icn_t_x300.gif"/>\n     <img alt="KTOP30" class="vmiddle legend" src="/images/common/icn_t_ktop.gif"/>\n    </td>\n    <td>\n     <a href="#viewer" onclick="openDisclsViewer(\'20230110000616\',\'\')" title="공매도 과열종목 지정(공매도 거래 금지 적용)">\n      공매도 과열종목 지정(공매도 거래 금지 적용)\n     </a>\n    </td>\n    <td>\n     유가증권시장본부\n    </td>\n    <td class="txc">\n     <a class="btn ico chart-00" href="#" onclick="openDisclsChart(\'09043\');return false;" title="공시차트">\n      <span>\n       공시차트\n      </span>\n     </a>\n     <a class="btn ico chart-01" href="#" onclick="fnPopStockPrices(\'09043\');return false;" title="주가차트">\n      <span>\n       주가차트\n      </span>\n     </a>\n    </td>\n   </tr>\n   <tr id="parkman">\n    <td class="first txc">\n     18:08\n    </td>\n    <td>\n    </td>\n    <td>\n     <a href="#viewer" onclick="openDisclsViewer(\'20230110000614\',\'\')" title="자기주식매매 신청내역(유가증권시장)">\n      자기주식매매 신청내역(유가증권시장)\n     </a>\n    </td>\n    <td>\n     유가증권시장본부\n    </td>\n    <td class="txc">\n    </td>\n   </tr>\n   <tr id="parkman">\n    <td class="first txc">\n     18:06\n    </td>\n    <td>\n    </td>\n    <td>\n     <a href="#viewer" onclick="openDisclsViewer(\'20230110000607\',\'\')" title="일일 회전율 상위 20종목-ELW포함(유가증권시장)">\n      일일 회전율 상위 20종목-ELW포함(유가증권시장)\n     </a>\n    </td>\n    <td>\n     유가증권시장본부\n    </td>\n    <td class="txc">\n    </td>\n   </tr>\n   <tr id="parkman">\n    <td class="first txc">\n     18:06\n    </td>\n    <td>\n    </td>\n    <td>\n     <a href="#viewer" onclick="openDisclsViewer(\'20230110000605\',\'\')" title="일일 회전율 상위 20종목-ELW제외(유가증권시장)">\n      일일 회전율 상위 20종목-ELW제외(유가증권시장)\n     </a>\n    </td>\n    <td>\n     유가증권시장본부\n    </td>\n    <td class="txc">\n    </td>\n   </tr>\n   <tr id="parkman">\n    <td class="first txc">\n     18:06\n    </td>\n    <td>\n    </td>\n    <td>\n     <a href="#viewer" onclick="openDisclsViewer(\'20230110000606\',\'\')" title="대량매매내역(유가증권시장)">\n      대량매매내역(유가증권시장)\n     </a>\n    </td>\n    <td>\n     유가증권시장본부\n    </td>\n    <td class="txc">\n    </td>\n   </tr>\n  </tbody>\n </table>\n</section>\n<!-- 페이징 START -->\n<section class="paging-group">\n <div class="paging type-00">\n  <a class="pprev" href="#prevPage10" onclick="return false;">\n   <span>\n    이전10개 페이지\n   </span>\n  </a>\n  <a class="prev" href="#prevPage" onclick="return false;">\n   <span>\n    이전 페이지\n   </span>\n  </a>\n  <a class="active" href="#page_link_1" onclick="return false;">\n   1\n  </a>\n  <a href="#page_link_2" onclick="fnPageGo(\'2\');return false;">\n   2\n  </a>\n  <a href="#page_link_3" onclick="fnPageGo(\'3\');return false;">\n   3\n  </a>\n  <a href="#page_link_4" onclick="fnPageGo(\'4\');return false;">\n   4\n  </a>\n  <a href="#page_link_5" onclick="fnPageGo(\'5\');return false;">\n   5\n  </a>\n  <a href="#page_link_6" onclick="fnPageGo(\'6\');return false;">\n   6\n  </a>\n  <a href="#page_link_7" onclick="fnPageGo(\'7\');return false;">\n   7\n  </a>\n  <a href="#page_link_8" onclick="fnPageGo(\'8\');return false;">\n   8\n  </a>\n  <a href="#page_link_9" onclick="fnPageGo(\'9\');return false;">\n   9\n  </a>\n  <a href="#page_link_10" onclick="fnPageGo(\'10\');return false;">\n   10\n  </a>\n  <a class="next" href="#nextPage" onclick="fnPageGo(\'2\');return false;">\n   <span>\n    다음 페이지\n   </span>\n  </a>\n  <a class="nnext" href="#nextPage10" onclick="fnPageGo(\'11\');return false;">\n   <span>\n    다음10개 페이지\n   </span>\n  </a>\n </div>\n <div class="info type-00">\n  전체\n  <em>\n   386\n  </em>\n  건 :\n  <strong>\n   1\n  </strong>\n  /26\n  <select id="currentPageSize" name="currentPageSize">\n   <option selected="selected" value="15">\n    15건\n   </option>\n   <option value="30">\n    30건\n   </option>\n   <option value="50">\n    50건\n   </option>\n   <option value="100">\n    100건\n   </option>\n  </select>\n  <a class="btn-sprite btn-go vmiddle" href="#" onclick="fnSearch1();return false;" title="GO">\n   <span>\n    GO\n   </span>\n  </a>\n </div>\n</section>\n<!-- 페이징 END -->\n<script type="text/JavaScript">\n $(document).ready(function(){\r\n\tvar svrGubun = "real2";\r\n\tif( svrGubun.indexOf("dr") >= 0 ){\r\n\t\tfn_InitTitle("시간,회사명,공시제목,제출인", "true,true,true,true");\r\n\t} else {\r\n\t\tfn_InitTitle("시간,회사명,공시제목,제출인,차트/주가", "true,true,true,true,false");\r\n\t}\r\n\r\n\t$("input[name=\'segment\']:radio").change(function(){\r\n\t\tconsole.log(this.value);\r\n\t\t$("#searchForm > #kosdaqSegment").val(this.value);\r\n\t\tfnSearch();\r\n\t});\r\n});\n</script>\n'
+
+tables = pd.read_html(html_unicode)
+
+tables[0]
+Out[14]: 
+   Unnamed: 0 Unnamed: 1  ... Unnamed: 3  Unnamed: 4
+0       18:41       네오펙트  ...       네오펙트  공시차트  주가차트
+1       18:20       에스티팜  ...    코스닥시장본부  공시차트  주가차트
+2       18:11        NaN  ...    코스닥시장본부         NaN
+3       18:11        NaN  ...    코스닥시장본부         NaN
+4       18:11        NaN  ...    코스닥시장본부         NaN
+5       18:11        NaN  ...    코스닥시장본부         NaN
+6       18:11        NaN  ...    코스닥시장본부         NaN
+7       18:10        NaN  ...    코스닥시장본부         NaN
+8       18:10        NaN  ...    코스닥시장본부         NaN
+9       18:09       메디콕스  ...       메디콕스  공시차트  주가차트
+10      18:09     아모레퍼시픽  ...   유가증권시장본부  공시차트  주가차트
+11      18:08        NaN  ...   유가증권시장본부         NaN
+12      18:06        NaN  ...   유가증권시장본부         NaN
+13      18:06        NaN  ...   유가증권시장본부         NaN
+14      18:06        NaN  ...   유가증권
