@@ -1,1 +1,73 @@
+import re
+import time
+import requests as rq
+import pandas as pd
+import numpy as np
+import pymysql
+from io import BytesIO
+from bs4 import BeautifulSoup
+from tqdm import tqdm
 
+# 1. 날짜 고정 (데이터가 확실히 존재하는 날짜)
+biz_day = "20260210" 
+print(f"🚀 실행 날짜: {biz_day}")
+
+# 2. KRX 및 섹터 데이터 수집
+sess = rq.Session()
+headers = {"Referer": "https://data.krx.co.kr/", "User-Agent": "Mozilla/5.0"}
+
+# KRX OTP 발급 및 데이터 다운로드
+try:
+    gen_otp_url = "https://data.krx.co.kr/comm/fileDn/GenerateOTP/generate.cmd"
+    gen_otp_data = {
+        "locale": "ko_KR", "mktId": "ALL", "trdDd": biz_day,
+        "money": "1", "csvxls_isNo": "false", "name": "fileDown",
+        "url": "dbms/MDC/STAT/standard/MDCSTAT03501"
+    }
+    otp = sess.post(gen_otp_url, data=gen_otp_data, headers=headers).text.strip()
+    krx_ind_res = sess.post("https://data.krx.co.kr/comm/fileDn/download_csv/download.cmd", data={"code": otp}, headers=headers)
+
+    # 섹터 데이터 수집
+    sector_codes = ["G25", "G35", "G50", "G40", "G10", "G20", "G55", "G30", "G15", "G45"]
+    data_sector = []
+    for code in tqdm(sector_codes, desc="섹터 수집 중"):
+        res = sess.get(f"https://www.wiseindex.com/Index/GetIndexComponets?ceil_yn=0&dt={biz_day}&sec_cd={code}", headers=headers)
+        if res.status_code == 200:
+            data_sector.append(pd.json_normalize(res.json()["list"]))
+        time.sleep(1)
+    kor_sector_df = pd.concat(data_sector, axis=0)
+
+    # 3. DB 저장 (질문자님 테이블 구조에 100% 맞춤)
+    con = pymysql.connect(user="root", passwd="1234", host="127.0.0.1", db="stock_db", charset="utf8")
+    cur = con.cursor()
+
+    # (1) kor_ticker 저장
+    if len(krx_ind_res.content) > 100:
+        krx_ind = pd.read_csv(BytesIO(krx_ind_res.content), encoding="EUC-KR")
+        ticker_sql = """
+        INSERT INTO kor_ticker (종목코드, 종목명, 시장구분, 종가, 시가총액, 기준일)
+        VALUES (%s, %s, %s, %s, %s, %s)
+        ON DUPLICATE KEY UPDATE 종가=VALUES(종가), 시가총액=VALUES(시가총액);
+        """
+        ticker_data = krx_ind[['종목코드', '종목명', '시장구분', '종가', '시가총액']].values.tolist()
+        for row in ticker_data: row.append(biz_day)
+        cur.executemany(ticker_sql, ticker_data)
+        print(f"✅ 티커 데이터 저장 성공!")
+
+    # (2) kor_sector 저장
+    sector_sql = """
+    INSERT INTO kor_sector (IDX_CD, CMP_CD, CMP_KOR, SEC_NM_KOR, 기준일)
+    VALUES (%s, %s, %s, %s, %s)
+    ON DUPLICATE KEY UPDATE CMP_KOR=VALUES(CMP_KOR);
+    """
+    sector_data = kor_sector_df[['IDX_CD', 'CMP_CD', 'CMP_KOR', 'SEC_NM_KOR']].values.tolist()
+    for row in sector_data: row.append(biz_day)
+    cur.executemany(sector_sql, sector_data)
+    print(f"✅ 섹터 데이터 저장 성공!")
+    
+    con.commit()
+    con.close()
+    print("✨ 모든 작업이 끝났습니다. MySQL에서 데이터를 확인하세요!")
+
+except Exception as e:
+    print(f"❌ 오류 발생: {e}")
